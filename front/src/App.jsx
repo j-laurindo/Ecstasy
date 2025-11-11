@@ -1,11 +1,13 @@
-import './App.css'
-import Header from './componentes/header/header'
+import './App.css';
+import Home from './pages/Home/Home';
+import Header from './componentes/header/header';
+import Card from './componentes/Card/Card';
 
 function App() {
 
   return (
     <>
-      <Header/>
+      <Home />
     </>
   )
 }

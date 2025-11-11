@@ -1,0 +1,62 @@
+.paginaHome {
+    width: auto;
+    background-color: var(--roxo-medio-escuro);
+    display: flex;
+    flex-direction: column;
+}
+
+.tituloHome {
+    display: flex;
+    padding-top: 70px;
+    flex-direction: column;
+    color: #EC59B2;
+    align-items: center;
+    justify-content: center;
+    font-family: Poppins, sans-serif;
+}
+
+.tituloHome h1 {
+    margin-bottom: -10px;
+    font-size: 45px;
+    font-weight: 500;
+    background: linear-gradient(270deg,rgba(146, 222, 248, 1) 0%, rgba(236, 89, 178, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+#titulo2 {
+    padding-top: 80px;
+}
+
+.tituloHome p {
+    color: var(--branco);
+    font-weight: 200;
+    padding-top: 30px;
+    font-size: 18px;
+}
+
+.fileiraCard {
+    display: flex;
+    padding: 60px;
+    gap: 6rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudoHome {
+    background: linear-gradient(90deg,rgba(40, 26, 75, 1) 15%, rgba(75, 60, 113, 1) 50%, rgba(40, 26, 75, 1) 85%);
+    height: 3000px;
+}
+
+.fileiraCategorias {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+    gap: 20px;
+}
+
+
+

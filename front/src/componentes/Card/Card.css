@@ -1,0 +1,69 @@
+.cardHome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+  
+.cardHome::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      0deg, 
+      transparent, 
+      transparent 30%, 
+      rgba(146, 222, 248, 1)
+    );
+    transform: rotate(-45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+  
+.cardHome:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(236, 89, 178, 0.5);
+}
+  
+.cardHome:hover::before {
+    opacity: 1;
+    transform: rotate(-45deg) translateY(100%); 
+}
+
+.cardHome article {
+    max-width: 410px;
+    height: 460px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--roxo-escuro);
+    border-radius: 15px;
+    padding: 50px;
+    color: var(--branco);
+    font-family: Poppins, sans-serif;
+}
+
+.cardHome h1 {
+    font-weight: bold;
+    text-shadow: rgba(236, 89, 178, 1) 0px 0px 15px;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+    background: linear-gradient(270deg,rgba(146, 222, 248, 1) 0%, rgba(236, 89, 178, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.cardHome p {
+    font-size: 18px;
+    font-weight: 300;
+}
+
