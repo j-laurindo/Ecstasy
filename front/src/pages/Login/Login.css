@@ -1,0 +1,12 @@
+body {
+    background-color: var(--roxo-medio-escuro);
+}
+
+.paginaLogin main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+

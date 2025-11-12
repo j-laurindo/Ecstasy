@@ -12,7 +12,6 @@
     color: #EC59B2;
     align-items: center;
     justify-content: center;
-    font-family: Poppins, sans-serif;
 }
 
 .tituloHome h1 {
@@ -50,11 +49,23 @@
     height: 3000px;
 }
 
+.categorias {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px;
+    gap: 25px;
+}
+
+.categorias h3 {
+    color: var(--branco);
+    font-weight: 400;
+}
+
 .fileiraCategorias {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 80px;
     gap: 20px;
 }
 

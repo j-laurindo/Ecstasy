@@ -1,9 +1,20 @@
-import { useState } from "react";
-import { loginUsers } from "../../api/films";
+import './Login.css';
+import Header from '../../componentes/header/header';
+import Form from '../../componentes/Form/Form';
 
-function Login({setToken, setRole}){
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
+function Login(){
+    return(
+        <>
+        <header>
+            <Header />  
+        </header>
+        <main className='paginaLogin'>
+            <Form 
+            tipo="login"/>
+        </main>
+        </>
+    );
 }
+
+export default Login;
 

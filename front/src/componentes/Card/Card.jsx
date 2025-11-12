@@ -5,10 +5,8 @@ function Card({titulo, conteudo}){
         <>
             <div className='cardHome'>
                 <article>
-                    <h1 className='titulo'>Card chamativo sobre o site</h1>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
+                    <h1 className='titulo'>{titulo}</h1>
+                    <p>{conteudo}</p>
                 </article>
             </div>
         </>

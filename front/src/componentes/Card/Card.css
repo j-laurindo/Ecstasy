@@ -40,14 +40,12 @@
 .cardHome article {
     max-width: 410px;
     height: 460px;
-    justify-content: center;
     align-items: center;
     text-align: center;
     background-color: var(--roxo-escuro);
     border-radius: 15px;
     padding: 50px;
     color: var(--branco);
-    font-family: Poppins, sans-serif;
 }
 
 .cardHome h1 {

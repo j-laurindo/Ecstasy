@@ -1,0 +1,70 @@
+.form {
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    color: var(--branco);
+}
+
+.form input, input::placeholder {
+    color: var(--branco);
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.form input {
+    background-color: transparent;
+    border-radius: 10px;
+    width: 415px;
+    padding: 10px 15px 10px 15px;
+    outline: none;
+}
+
+.form button {
+    max-width: 415px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.tituloFormulario p {
+    font-size: 18px !important;
+    font-weight: 300;
+    padding-bottom: 25px;
+    text-align: left !important;
+}
+
+.formAzul {
+    background: linear-gradient(175deg,rgba(146, 222, 248, 0.3) 0%, rgba(86, 131, 146, 0) 100%);
+    padding: 40px 60px 40px 60px;
+    border-radius: 20px;
+    border: 1px solid var(--azul);
+}
+
+.formAzul input {
+    border: 1px solid var(--azul);
+}
+
+.formAzul button {
+    background: linear-gradient(175deg,rgba(146, 222, 248, 1) 0%, rgba(104, 181, 208, 1) 100%);
+    color: var(--roxo-medio-escuro);
+}
+
+.formAzul p {
+    font-size: 12px;
+    text-align: center;
+
+}
+
+.formAzul a {
+    color: var(--branco);
+}
+
+.inputForm {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 25px;
+}
+
+
