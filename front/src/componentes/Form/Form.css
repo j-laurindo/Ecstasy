@@ -8,7 +8,7 @@
 
 .form input, input::placeholder {
     color: var(--branco);
-    font-weight: 300;
+    font-weight: 200;
     font-size: 16px;
 }
 
@@ -16,48 +16,76 @@
     background-color: transparent;
     border-radius: 10px;
     width: 415px;
-    padding: 10px 15px 10px 15px;
+    padding: 15px 15px 15px 15px;
     outline: none;
 }
 
 .form button {
+    display: block;
     max-width: 415px;
     padding: 10px;
     border-radius: 10px;
     border: none;
+    margin: 0 auto;
+    text-align: center !important;
 }
 
 .tituloFormulario p {
     font-size: 18px !important;
-    font-weight: 300;
+    font-weight: 250;
     padding-bottom: 25px;
     text-align: left !important;
 }
 
+.tituloFormulario h1 {
+    font-weight: 600;
+}
+
 .formAzul {
     background: linear-gradient(175deg,rgba(146, 222, 248, 0.3) 0%, rgba(86, 131, 146, 0) 100%);
-    padding: 40px 60px 40px 60px;
+    padding: 60px 60px 60px 60px;
     border-radius: 20px;
     border: 1px solid var(--azul);
 }
 
 .formAzul input {
     border: 1px solid var(--azul);
+    transition: all 0.2s ease;
+}
+
+.formAzul input:focus {
+    box-shadow: rgba(146, 222, 248, 0.2) 0px 7px 29px 0px;
 }
 
 .formAzul button {
     background: linear-gradient(175deg,rgba(146, 222, 248, 1) 0%, rgba(104, 181, 208, 1) 100%);
     color: var(--roxo-medio-escuro);
+    transition: all 0.3s ease;
+    margin-top: 18px;
+    padding: 10px 180px 10px 180px;
+}
+
+.formAzul button:hover {
+    background-color: var(--azul);
+    box-shadow: rgba(146, 222, 248, 1) 0px 0px 19px 0px;
 }
 
 .formAzul p {
     font-size: 12px;
     text-align: center;
+}
 
+#linkCadastro {
+    padding-top: 15px;
 }
 
 .formAzul a {
     color: var(--branco);
+    transition: all 0.2s ease;
+}
+
+.formAzul a:hover {
+    color: var(--azul);
 }
 
 .inputForm {
