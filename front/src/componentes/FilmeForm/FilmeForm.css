@@ -1,0 +1,172 @@
+.sectionForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 120px;
+}
+
+.formTitulo {
+    display: flex;
+    flex-direction: column;
+    color: var(--branco);
+    gap: 5px;
+    padding-bottom: 60px;
+}
+
+.formTitulo p {
+    font-weight: 300;
+}
+
+.formTitulo h1 {
+    font-weight: 600;
+}
+
+.divisor {
+    border: none;
+    border-top: 6px solid rgba(255, 255, 255, 0.2); 
+    margin: 15px 0;
+}
+
+.containerForm {
+    display: flex;
+    gap: 100px;
+}
+
+.filmeForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 580px;
+    color: var(--branco);
+}
+
+.filmeForm button {
+    border: 1px solid transparent;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    width: 300px;
+    align-self: center;
+    background: linear-gradient(175deg,rgba(146, 222, 248, 1) 0%, rgba(104, 181, 208, 1) 100%);
+    color: var(--roxo-medio-escuro);
+    transition: all 0.3s ease;
+}
+
+.filmeForm button:hover {
+    background: var(--azul);
+    box-shadow: rgba(146, 222, 248, 1) 0px 0px 19px 0px;
+}
+
+.inputForm {
+    gap: 5px;
+}
+
+#linha {
+    display: flex;
+    gap: 40px;
+}
+
+.inputForm input, textarea{
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--branco);
+    border-radius: 8px;
+    padding: 15px;
+    color: var(--branco);
+    outline: none;
+    transition: all 0.3s ease;
+}
+.inputForm input:focus, textarea:focus {
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 5px 15px;
+}
+
+.formPoster,
+figure {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    max-height: 575px;
+    border: 3px solid transparent;
+    border-radius: 20px; 
+    background:
+        linear-gradient(#111, #111) padding-box,
+        linear-gradient(270deg,rgba(146, 222, 248, 1) 0%,rgba(255, 255, 255, 1) 49%,rgba(236, 89, 178, 1) 100%) border-box;
+}
+
+.formPoster img {
+    border-radius: 20px 20px 0 0;
+}
+
+.formPoster button {
+    border: 1px solid transparent;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    background: linear-gradient(175deg,rgba(146, 222, 248, 1) 0%, rgba(104, 181, 208, 1) 100%);
+    color: var(--roxo-medio-escuro);
+    transition: all 0.3s ease;
+}
+
+.formPoster button:hover {
+    background: var(--azul);
+    box-shadow: rgba(146, 222, 248, 1) 0px 0px 19px 0px;
+}
+
+.formLogo,
+figure {
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    border: 3px solid transparent;
+    border-radius: 20px; 
+    background:
+        linear-gradient(#111, #111) padding-box,
+        linear-gradient(270deg,rgba(146, 222, 248, 1) 0%,rgba(255, 255, 255, 1) 49%,rgba(236, 89, 178, 1) 100%) border-box;
+}
+
+.formLogo img {
+    border-radius: 20px 20px 0 0;
+    padding: 30px;
+}
+
+.formLogo button {
+    border: 1px solid transparent;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    background: linear-gradient(175deg,rgba(146, 222, 248, 1) 0%, rgba(104, 181, 208, 1) 100%);
+    color: var(--roxo-medio-escuro);
+    transition: all 0.3s ease;
+}
+
+.formLogo button:hover {
+    background: var(--azul);
+    box-shadow: rgba(146, 222, 248, 1) 0px 0px 19px 0px;
+}
+
+.itensLateral {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.itemPoster label {
+    color: var(--branco);
+    padding-bottom: 5px;
+}
+
+.itemLogo label {
+    color: var(--branco);
+    padding-bottom: 5px;
+}
+
+select {
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    background: #1f1f1f;
+    border: 2px solid #ec59b2;
+    border-radius: 10px;
+    appearance: none;
+    cursor: pointer;
+
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}

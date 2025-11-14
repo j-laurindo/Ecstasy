@@ -6,7 +6,17 @@
     color: var(--branco);
 }
 
-.form input, input::placeholder {
+.form textarea {
+    background: transparent;
+    border: 1px solid var(--rosa-claro);
+    border-radius: 10px;
+    padding: 13px;
+    transition: all 0.2s ease;
+    outline: none;
+    color: var(--branco);
+}
+
+.form input, input::placeholder, textarea::placeholder {
     color: var(--branco);
     font-weight: 200;
     font-size: 16px;
@@ -62,11 +72,11 @@
     color: var(--roxo-medio-escuro);
     transition: all 0.3s ease;
     margin-top: 18px;
-    padding: 10px 180px 10px 180px;
+    padding: 10px 180px 10px 170px;
 }
 
 .formAzul button:hover {
-    background-color: var(--azul);
+    background: var(--azul);
     box-shadow: rgba(146, 222, 248, 1) 0px 0px 19px 0px;
 }
 
@@ -94,5 +104,43 @@
     gap: 5px;
     padding-bottom: 25px;
 }
+
+.formRosa {
+    background: linear-gradient(175deg,rgba(236, 89, 178, 0.3) 0%, rgba(86, 131, 146, 0) 100%);
+    padding: 60px 60px 60px 60px;
+    border-radius: 20px;
+    align-items: center;
+    border: 1px solid var(--rosa-claro);
+}
+
+.formRosa input {
+    border: 1px solid var(--rosa-claro);
+    width: 460px;
+    transition: all 0.2s ease;
+}
+
+.formRosa input:focus, textarea:focus {
+    box-shadow: rgba(236, 89, 178, 0.2) 0px 7px 29px 0px;
+}
+
+.formRosa button {
+    background: linear-gradient(175deg,rgba(236, 89, 178, 1) 0%, rgba(172, 72, 103, 1) 100%);
+    color: var(--branco);
+    transition: all 0.3s ease;
+    margin-top: 18px;
+    text-align: center;
+    padding: 10px 180px 10px 180px;
+}
+
+.formRosa button:hover {
+    background: var(--rosa-claro);
+    box-shadow: rgba(236, 89, 178, 1) 0px 0px 19px 0px;
+}
+
+.formRosa p {
+    font-size: 12px;
+    text-align: center;
+}
+
 
 
