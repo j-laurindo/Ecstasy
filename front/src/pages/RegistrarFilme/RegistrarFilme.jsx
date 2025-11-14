@@ -1,8 +1,8 @@
-import './EditarFilme.css';
+import './RegistrarFilme.css';
 import Header from '../../componentes/header/header';
 import FilmeForm from '../../componentes/FilmeForm/FilmeForm';
 
-function EditarFilme(){
+function RegistrarFilme(){
     return(
         <>
         <header>
@@ -11,11 +11,11 @@ function EditarFilme(){
         <main>
             <section>
                 <FilmeForm 
-                modo="edicao"/>
+                modo="registro"/>
             </section>
         </main>
         </>
     );
 }
 
-export default EditarFilme;
+export default RegistrarFilme;

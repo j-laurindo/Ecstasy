@@ -1,24 +1,23 @@
 import './FilmeForm.css';
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
-import { useState } from "react";
-
-const animatedComponents = makeAnimated();
+import { PlusCircle } from 'react-bootstrap-icons';
+import TituloPagina from '../TituloPagina/TituloPagina';
 
 function FilmeForm({modo}){
-    // NÃO FUNCIONA
+    // FALTA:
+    // -> Fazer as Tags
+    // -> Puxar as informações nos inputs de edição
+    // -> Fazer o link de adicionar URL do poster/link
     const isEdit = modo === "edicao";
 
     return(
         <>
         <section className='sectionForm'>
-            <section className='formTitulo'>
-                <h1>{isEdit ? "Editar Filme" : "Registrar Filme"}</h1>
-                <p>{isEdit ? 
+            <TituloPagina
+            titulo={isEdit ? "Editar Filme" : "Registrar Filme"}
+            desc={isEdit ? 
                 "Aqui você pode editar as informações do filme, mas as alterações só serão realizadas após a aprovação do administrador." : 
-                "Aqui você pode registrar um novo filme no Ecstasy, mas o registro só será realizado após a aprovação do administrador."}</p>
-                <hr className='divisor' />
-            </section>
+                "Aqui você pode registrar um novo filme no Ecstasy, mas o registro só será realizado após a aprovação do administrador."}
+            />
             
             <section className='containerForm'>
                 <section className='itensLateral'>
@@ -88,8 +87,41 @@ function FilmeForm({modo}){
                             rows='5' 
                         />
                     </div>
+                    <div className='inputForm'>
+                        <label>Atores:</label>
+                        <div className='lineSelect'>
+                            <input
+                            type='text'
+                            placeholder='Digite o nome de um(a) ator'
+                            required
+                            />
+                            <button id='addButton'>
+                                <PlusCircle 
+                                size={50} 
+                                color='white'
+                                />
+                            </button>
+                        </div>
+                    </div>
+                    <div className='inputForm'>
+                        <label>Categorias:</label>
+                        <div className='lineSelect'>
+                            <input
+                            type='text'
+                            placeholder='Digite o nome de uma categoria'
+                            required
+                            />
+                            <button id='addButton'>
+                                <PlusCircle 
+                                size={40} 
+                                color='white'
+                                />
+                            </button>
+                        </div>
+                    </div>
                     <button type='submit' aria-label='Botão de enviar'>{isEdit ? "Solicitar Edição" : "Solicitar Filme"}</button>
                 </form>
+                
             </section>
         </section>
         </>

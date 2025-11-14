@@ -1,0 +1,21 @@
+.formTitulo {
+    display: flex;
+    flex-direction: column;
+    color: var(--branco);
+    gap: 5px;
+    padding-bottom: 60px;
+}
+
+.formTitulo p {
+    font-weight: 300;
+}
+
+.formTitulo h1 {
+    font-weight: 600;
+}
+
+.divisor {
+    border: none;
+    border-top: 6px solid rgba(255, 255, 255, 0.2); 
+    margin: 15px 0;
+}

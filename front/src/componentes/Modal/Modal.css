@@ -1,0 +1,29 @@
+.wrapper {
+    position: 'relative'; 
+    display: 'inline-block'; 
+}
+
+.collapseContent {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-top: 10px; 
+    margin-bottom: 20px;
+  }
+
+.button {
+    border: 1px solid transparent;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    width: 345px;
+    background: linear-gradient(175deg,rgba(146, 222, 248, 1) 0%, rgba(104, 181, 208, 1) 100%);
+    color: var(--roxo-medio-escuro);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: var(--azul);
+    box-shadow: rgba(146, 222, 248, 1) 0px 0px 19px 0px;
+}
+
