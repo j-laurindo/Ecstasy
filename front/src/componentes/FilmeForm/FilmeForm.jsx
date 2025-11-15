@@ -7,7 +7,6 @@ import { useState } from 'react';
 function FilmeForm({ modo }) {
     // FALTA:
     // -> Puxar as informações nos inputs de edição
-    // -> Fazer o link de adicionar URL do poster/link
     const isEdit = modo === "edicao";
 
     // --- ESTADOS PARA AS TAGS (EXISTENTES) ---

@@ -1,19 +1,19 @@
 import './EditarFilme.css';
-import Header from '../../componentes/header/header';
+import Header from '../../componentes/Header/Header';
 import FilmeForm from '../../componentes/FilmeForm/FilmeForm';
 
-function EditarFilme(){
-    return(
+function EditarFilme() {
+    return (
         <>
-        <header>
-            <Header/>
-        </header>
-        <main>
-            <section>
-                <FilmeForm 
-                modo="edicao"/>
-            </section>
-        </main>
+            <header>
+                <Header />
+            </header>
+            <main>
+                <section>
+                    <FilmeForm
+                        modo="edicao" />
+                </section>
+            </main>
         </>
     );
 }

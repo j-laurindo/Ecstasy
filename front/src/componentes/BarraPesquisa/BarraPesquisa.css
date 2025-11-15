@@ -1,0 +1,34 @@
+.containerPesquisa {
+    position: relative; 
+    width: 100%;
+}
+
+.iconeBusca {
+    position: absolute;
+    top: 50%; 
+    left: 10px; 
+    transform: translateY(-50%); 
+    color: var(--branco); 
+    pointer-events: none; 
+}
+
+.barraPesquisa {
+    background: rgba(217, 217, 217, 0.2);
+    color: var(--branco);
+    outline: none;
+    border: 1px solid var(--branco);
+    border-radius: 20px;
+    font-size: 14px;
+    font-family: Poppins, sans-serif;
+    padding: 10px 15px;
+    padding-left: 40px;
+    width: 100%;
+}
+
+.barraPesquisa input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: Poppins, sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    padding-left: 5px;
+}

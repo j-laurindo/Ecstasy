@@ -1,4 +1,4 @@
-.formTitulo {
+.titulo {
     display: flex;
     flex-direction: column;
     color: var(--branco);
@@ -6,11 +6,11 @@
     padding-bottom: 60px;
 }
 
-.formTitulo p {
+.titulo p {
     font-weight: 300;
 }
 
-.formTitulo h1 {
+.titulo h1 {
     font-weight: 600;
 }
 

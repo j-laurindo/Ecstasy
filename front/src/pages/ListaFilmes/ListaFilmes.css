@@ -1,0 +1,19 @@
+.paginaLista {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 120px;
+}
+
+.listaFilmes {
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+}
+
+.fileira {
+    display: flex;
+    gap: 30px;
+    padding-top: 40px;
+    justify-content: center;
+}

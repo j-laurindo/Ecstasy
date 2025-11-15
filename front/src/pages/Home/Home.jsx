@@ -1,11 +1,11 @@
 import './Home.css';
-import Header from '../../componentes/header/header';
+import Header from '../../componentes/Header/Header';
 import Card from '../../componentes/Card/Card';
 import CardsCategoria from '../../componentes/CardsCategoria/CardsCategoria';
 import TesteSwiper from '../../componentes/SwiperTeste/swiper';
 
-function Home(){
-    return(
+function Home() {
+    return (
         <>
             <section className='paginaHome' aria-label='Página principal de home'>
                 <header className='headerHome'>
@@ -16,15 +16,15 @@ function Home(){
                         <p>Veja aqui no Ecstasy os filmes mais tops</p>
                     </div>
                     <div className='fileiraCard'>
-                        <Card 
-                        titulo="Card chamativo sobre site"
-                        conteudo="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        <Card
+                            titulo="Card chamativo sobre site"
+                            conteudo="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
                         />
-                        <Card 
-                        titulo="Meu nome é Julia"
-                        conteudo="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        <Card
+                            titulo="Meu nome é Julia"
+                            conteudo="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"/>
                     </div>
@@ -39,18 +39,18 @@ function Home(){
                         <h3>Procure suas categorias favoritas</h3>
                         <div className='fileiraCategorias'>
                             <CardsCategoria
-                            categoria="AVENTURA"
+                                categoria="AVENTURA"
                             />
                             <CardsCategoria
-                            categoria="ROMANCE"
+                                categoria="ROMANCE"
                             />
                             <CardsCategoria
-                            categoria="TERROR"
+                                categoria="TERROR"
                             />
                             <CardsCategoria
-                            categoria="COMÉDIA"
+                                categoria="COMÉDIA"
                             />
-                        </div>                    
+                        </div>
                     </div>
                 </main>
             </section>

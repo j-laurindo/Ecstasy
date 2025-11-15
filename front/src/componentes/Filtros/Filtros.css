@@ -1,0 +1,23 @@
+.containerFiltros {
+    background-color: var(--roxo-medio);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: -20px;
+}
+
+.buttonsFiltro {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.buttonsFiltro p {
+    color: var(--branco); 
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    white-space: nowrap;
+}

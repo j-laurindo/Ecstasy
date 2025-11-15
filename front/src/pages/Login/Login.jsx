@@ -1,17 +1,17 @@
 import './Login.css';
-import Header from '../../componentes/header/header';
+import Header from '../../componentes/Header/Header';
 import Form from '../../componentes/Form/Form';
 
-function Login(){
-    return(
+function Login() {
+    return (
         <>
-        <header>
-            <Header />  
-        </header>
-        <main className='paginaLogin'>
-            <Form 
-            tipo="login"/>
-        </main>
+            <header>
+                <Header />
+            </header>
+            <main className='paginaLogin'>
+                <Form
+                    tipo="login" />
+            </main>
         </>
     );
 }

@@ -1,5 +1,5 @@
-import './header.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './Header.css';
+import { Bell } from 'react-bootstrap-icons';
 
 function Header(){
     return(
@@ -12,13 +12,9 @@ function Header(){
                         <li>Filmes</li>
                         <li>Sobre Nós</li>
                     </ul>
-                    <input 
-                    type='text'
-                    placeholder='Pesquise...'>
-                    </input>
                     <ul className='menuItens'>
                         <li>
-                            <i class="bi bi-bell"></i>
+                            <Bell color='white' size={10}/>
                         </li>
                         <li>
                             perfil

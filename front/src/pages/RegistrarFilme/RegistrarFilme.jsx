@@ -1,19 +1,19 @@
 import './RegistrarFilme.css';
-import Header from '../../componentes/header/header';
+import Header from '../../componentes/Header/Header';
 import FilmeForm from '../../componentes/FilmeForm/FilmeForm';
 
-function RegistrarFilme(){
-    return(
+function RegistrarFilme() {
+    return (
         <>
-        <header>
-            <Header/>
-        </header>
-        <main>
-            <section>
-                <FilmeForm 
-                modo="registro"/>
-            </section>
-        </main>
+            <header>
+                <Header />
+            </header>
+            <main>
+                <section>
+                    <FilmeForm
+                        modo="registro" />
+                </section>
+            </main>
         </>
     );
 }

@@ -1,0 +1,62 @@
+.dropdownFiltro {
+    position: relative;
+    display: inline-block;
+}
+
+.botaoFiltro {
+    background: transparent;
+    color: var(--azul);
+    border: 3px solid var(--azul); 
+    border-radius: 25px; 
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 10px 30px 10px 30px;
+    font-size: 18px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filtro {
+    position: absolute;
+    left: 0;
+    z-index: 10;
+    width: max-content; 
+    min-width: 180px;
+    background-color: var(--branco); 
+    color: var(--roxo-medio-escuro); 
+    border-radius: 15px; 
+    padding: 0; 
+    margin-top: 5px; 
+    overflow: hidden; 
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.filtroOpcao {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 20px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--cinza); 
+    gap: 12px;
+}
+
+.filtroOpcao:last-child {
+    border-bottom: none;
+}
+
+.filtroOpcao:hover {
+    background-color: var(--roxo-escuro-fundo); 
+}
+
+.opcaoLimpar {
+    color: var(--rosa-escuro);
+    border-bottom: 1px solid var(--cinza);
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
