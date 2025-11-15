@@ -61,7 +61,7 @@ figure {
     display: flex;
     flex-direction: column;
     max-width: 350px;
-    max-height: 575px;
+    height: 575px;
     border: 3px solid transparent;
     border-radius: 20px; 
     background:
@@ -69,11 +69,16 @@ figure {
         linear-gradient(270deg,rgba(146, 222, 248, 1) 0%,rgba(255, 255, 255, 1) 49%,rgba(236, 89, 178, 1) 100%) border-box;
 }
 
-.formPoster img {
-    border-radius: 20px 20px 0 0;
+#logo {
+    max-height: fit-content;
 }
 
-.formPoster button {
+.formPoster img {
+    border-radius: 20px 20px 0 0;
+    height: 575px;
+}
+
+.itemPoster button {
     border: 1px solid transparent;
     border-radius: 15px 15px 15px 15px;
     padding: 16px;
@@ -82,7 +87,7 @@ figure {
     transition: all 0.3s ease;
 }
 
-.formPoster button:hover {
+.itemPoster button:hover {
     background: var(--azul);
     box-shadow: rgba(146, 222, 248, 1) 0px 0px 19px 0px;
 }
@@ -92,7 +97,7 @@ figure {
     background-color: rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
-    max-width: 350px;
+    width: 350px;
     border: 3px solid transparent;
     border-radius: 20px; 
     background:
@@ -105,7 +110,7 @@ figure {
     padding: 30px;
 }
 
-.formLogo button {
+.itemLogo button {
     border: 1px solid transparent;
     border-radius: 15px 15px 15px 15px;
     padding: 16px;
@@ -114,7 +119,7 @@ figure {
     transition: all 0.3s ease;
 }
 
-.formLogo button:hover {
+.itemLogo button:hover {
     background: var(--azul);
     box-shadow: rgba(146, 222, 248, 1) 0px 0px 19px 0px;
 }
@@ -150,5 +155,44 @@ figure {
 }
 
 .lineSelect input{
-    width: 435px;
+    width: 2935px;
 }
+
+.listaTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  margin-top: 10px; 
+}
+
+.itemTag {
+  display: flex;
+  align-items: center;
+  background-color: var(--roxo-claro); 
+  color: #FFFFFF;
+  padding: 1px 20px 1px 20px;
+  border-radius: 20px; 
+  font-size: 14px;
+}
+
+/* Botão "X" de remover */
+.removeTag {
+  background: none;
+  border: none;
+  width: 40px !important;
+  background: none !important;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 8px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.removeTag:hover {
+    box-shadow: none !important;
+}
+
+
+

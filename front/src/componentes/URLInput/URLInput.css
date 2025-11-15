@@ -1,0 +1,33 @@
+.urlInputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.urlInput {
+    padding-top: 15px;
+}
+
+.urlInput input{
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--branco);
+    border-radius: 8px;
+    padding: 15px;
+    color: var(--branco);
+    outline: none;
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+.linhaUrl {
+    display: flex;
+    gap: 10px;
+}
+
+.linhaUrl button{
+    border: 1px solid transparent;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    background: linear-gradient(175deg,rgba(146, 222, 248, 1) 0%, rgba(104, 181, 208, 1) 100%);
+    color: var(--roxo-medio-escuro);
+    transition: all 0.3s ease;
+}
