@@ -4,6 +4,7 @@ import TituloPagina from '../../componentes/TituloPagina/TituloPagina';
 import CardFilme from '../../componentes/CardFilme/CardFilme';
 import Filtros from '../../componentes/Filtros/Filtros';
 import BarraPesquisa from '../../componentes/BarraPesquisa/BarraPesquisa';
+import Footer from '../../componentes/Footer/Footer';
 
 function ListaFilmes() {
     return (
@@ -129,6 +130,9 @@ function ListaFilmes() {
                     </div>
                 </section>
             </main>
+            <footer>
+                <Footer/>
+            </footer>
         </>
     );
 }

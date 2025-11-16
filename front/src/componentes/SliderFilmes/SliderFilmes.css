@@ -39,13 +39,16 @@
 
 .carrosselSlick .slick-slide {
     padding: 0 10px;
-    transform: scale(0.9); 
-    opacity: 0.6; 
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: scale(0.85); 
+    filter: brightness(0.65); 
+    opacity: 0.85;
 }
 
 .carrosselSlick .slick-center {
-    transform: scale(1); 
-    opacity: 1; 
+    transform: scale(1);
+    filter: brightness(1);
+    opacity: 1;
 }
 
 .slideItemWrapper {

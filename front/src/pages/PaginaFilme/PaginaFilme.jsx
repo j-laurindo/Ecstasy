@@ -6,7 +6,8 @@ import Header from '../../componentes/Header/Header';
 import CardFilme from '../../componentes/CardFilme/CardFilme';
 import TituloGradiente from '../../componentes/TituloGradiente/TituloGradiente';
 import Botao from '../../componentes/Botao/Botao';
-import SliderFilmes from '../../componentes/ListaRecomendados/SliderFilmes';
+import SliderFilmes from '../../componentes/SliderFilmes/SliderFilmes';
+import Footer from '../../componentes/Footer/Footer';
 
 function PaginaFilme() {
     const filme = {
@@ -110,6 +111,9 @@ function PaginaFilme() {
                     <SliderFilmes />
                 </section>
             </main>
+            <footer>
+                <Footer/>
+            </footer>
         </section>
     );
 }

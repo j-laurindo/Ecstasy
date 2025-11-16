@@ -4,7 +4,8 @@ import Card from '../../componentes/Card/Card';
 import CardsCategoria from '../../componentes/CardsCategoria/CardsCategoria';
 import TituloGradiente from '../../componentes/TituloGradiente/TituloGradiente';
 import Carrossel from '../../componentes/Carrossel/Carrossel';
-import SliderFilmes from '../../componentes/ListaRecomendados/SliderFilmes';
+import SliderFilmes from '../../componentes/SliderFilmes/SliderFilmes';
+import Footer from '../../componentes/Footer/Footer';
 
 function Home() {
     return (
@@ -70,6 +71,9 @@ function Home() {
                         </section>
                     </section>
                 </main>
+                <footer>
+                    <Footer />
+                </footer>
             </section>
         </>
     );
