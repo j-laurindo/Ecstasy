@@ -1,0 +1,26 @@
+.tituloContainer {
+    display: flex;
+    flex-direction: column;
+    color: #EC59B2;
+    align-items: center;
+    justify-content: center;
+}
+
+.tituloContainer h1 {
+    height: 0;
+    margin: -8px 0;
+    font-size: 45px;
+    font-weight: 500;
+    background: linear-gradient(270deg,rgba(146, 222, 248, 1) 0%, rgba(236, 89, 178, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.tituloContainer p {
+    color: var(--branco);
+    font-weight: 200;
+    padding-top: 30px;
+    font-size: 18px;
+}

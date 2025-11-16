@@ -1,10 +1,10 @@
 import './CardFilme.css';
 
-function CardFilme({titulo, ano}){
+function CardFilme({titulo, ano, urlImagem}) {
     return(
         <article className='cardFilme'>
             <figure className='cardPoster'>
-                <img src='https://br.web.img2.acsta.net/img/8d/f3/8df3f4de748e61ea7311db6f8fc1d455.jpg' alt='Poster do filme [nome filme]' />
+                <img src={urlImagem} alt={`Poster do filme ${titulo}`} />
             </figure>
             <div className='infoFilme'>
                 <h1>{titulo}</h1>

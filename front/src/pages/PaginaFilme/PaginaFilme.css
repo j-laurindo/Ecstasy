@@ -1,0 +1,181 @@
+* {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.paginaFilme {
+    background-color: var(--roxo-medio-escuro);
+    min-height: 100vh;
+}
+
+.paginaFilme header {
+    position: fixed; 
+    width: 100%;
+    z-index: 10; 
+}
+
+.bannerIntegrado {
+    width: 100%;
+    height: 100vh; 
+    position: relative; 
+    background-size: cover; 
+    background-position: center top; 
+    background-repeat: no-repeat;
+}
+
+.bannerOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.7) 0%, 
+        rgba(0, 0, 0, 0.3) 50%, 
+        var(--roxo-medio-escuro) 100%); 
+    z-index: 1; 
+}
+
+.bannerContent {
+    position: relative; 
+    z-index: 2; 
+    padding: 200px 20px 20px 0px; 
+    color: var(--branco);
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logoFilme {
+    max-width: 550px; 
+    height: auto; 
+    width: 100%;
+    margin-bottom: 20px; 
+}
+
+.infoDetalhes {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.bannerButtons {
+    display: flex;
+    width: 35%;
+    gap: 15px;
+}
+
+.containerFilme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px; 
+    margin-top: -120px; 
+    position: relative; 
+    z-index: 5; 
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.conteudoFilme {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    width: 100%;
+}
+
+.dadoFilme {
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+    color: var(--branco); 
+}
+
+.divisorGradiente {
+    border: none;
+    height: 3px; 
+    width: 1200px;
+    margin: 100px auto;
+    background-image: linear-gradient(to right, 
+        #ec59b8 40%,    
+        #4BCBDE 70%  
+    );
+    filter: drop-shadow(0 0 5px rgba(75, 203, 222, 0.5));
+}
+
+.campoInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.campoInfo h1 {
+    font-weight: 600;
+    font-size: 22px;
+    height: 25px;
+    margin-top: 20px;
+}
+
+.campoInfo p {
+    font-weight: 200;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.campoCategoria {
+    display: flex;
+    flex-wrap: wrap; /* Importante para quebrar a linha se houver muitas tags */
+    gap: 15px; /* Reduzi o gap para 15px para melhor agrupamento visual, mantendo o espaçamento */
+    margin-top: 30px;
+}
+
+.tagCategoria {
+    color: var(--branco); 
+    border-radius: 20px; 
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    border: 2px solid transparent; 
+    border-image: linear-gradient(to right, var(--rosa-claro), var(--azul)) 1;
+    filter: drop-shadow(0 0 4px rgba(236, 89, 187, 0.4));
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 6px rgba(236, 89, 187, 0.7)); 
+    
+}
+
+.tagCategoria p {
+    margin: 0;
+    padding: 0;
+}
+
+.tagCategoria:hover {
+    filter: drop-shadow(0 0 6px rgba(236, 89, 187, 0.7)); 
+    transform: scale(1.03);
+}
+
+
+.containerRecomendados {
+    height: 0 auto;
+    padding-bottom: 60px;
+}
+
+

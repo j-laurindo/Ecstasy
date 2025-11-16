@@ -5,35 +5,8 @@
     flex-direction: column;
 }
 
-.tituloHome {
-    display: flex;
-    padding-top: 70px;
-    flex-direction: column;
-    color: #EC59B2;
-    align-items: center;
-    justify-content: center;
-}
-
-.tituloHome h1 {
-    margin-bottom: -10px;
-    font-size: 45px;
-    font-weight: 500;
-    background: linear-gradient(270deg,rgba(146, 222, 248, 1) 0%, rgba(236, 89, 178, 1) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    display: inline-block;
-}
-
-#titulo2 {
-    padding-top: 80px;
-}
-
-.tituloHome p {
-    color: var(--branco);
-    font-weight: 200;
-    padding-top: 30px;
-    font-size: 18px;
+#tituloHome {
+    margin-top: 60px;
 }
 
 .fileiraCard {
@@ -46,7 +19,8 @@
 
 .conteudoHome {
     background: linear-gradient(90deg,rgba(40, 26, 75, 1) 15%, rgba(75, 60, 113, 1) 50%, rgba(40, 26, 75, 1) 85%);
-    height: 3000px;
+    height: auto;
+    padding-top: 100px
 }
 
 .categorias {
@@ -60,6 +34,7 @@
 .categorias h3 {
     color: var(--branco);
     font-weight: 400;
+    font-size: 30px;
 }
 
 .fileiraCategorias {

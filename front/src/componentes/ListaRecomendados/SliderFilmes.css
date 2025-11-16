@@ -1,0 +1,70 @@
+.SliderFilmes {
+    max-width: 1200px;
+    margin: 60px auto 40px auto; 
+    padding: 0 10px; 
+    position: relative;
+    color: var(--branco);
+}
+
+.tituloSlider {
+    font-size: 40px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--branco);
+    text-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;;
+    padding-bottom: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.info {
+    margin-top: 10px;
+}
+
+.info p:first-child {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.info p:last-child {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+}
+
+.carrosselSlick {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.carrosselSlick .slick-slide {
+    padding: 0 10px;
+    transform: scale(0.9); 
+    opacity: 0.6; 
+}
+
+.carrosselSlick .slick-center {
+    transform: scale(1); 
+    opacity: 1; 
+}
+
+.slideItemWrapper {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 5px; 
+}
+
+.slick-prev:before, .slick-next:before {
+    display: none;
+}
+
+.slick-dots li button:before {
+    color: transparent !important; 
+    opacity: 0.5 !important;
+}
+.slick-dots li.slick-active button:before {
+    color: var(--azul) !important; 
+    opacity: 1 !important;
+}

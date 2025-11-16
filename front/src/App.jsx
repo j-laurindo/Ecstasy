@@ -6,12 +6,13 @@ import EditarFilme from './pages/EditarFilme/EditarFilme';
 import RegistrarFilme from './pages/RegistrarFilme/RegistrarFilme';
 import ListaFilmes from './pages/ListaFilmes/ListaFilmes';
 import CardFilme from './componentes/CardFilme/CardFilme';
+import PaginaFilme from './pages/PaginaFilme/PaginaFilme';
 
 function App() {
 
   return (
     <>
-      <ListaFilmes />
+      <Home />
     </>
   )
 }

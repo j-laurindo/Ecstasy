@@ -1,0 +1,90 @@
+/* --- FilmeBanner.css --- */
+
+/* 1. CONTAINER EXTERNO (com a imagem de fundo) */
+.filmeBanner {
+    /* Dimensões */
+    width: 100%;
+    height: 400px; /* Ajuste esta altura conforme o design */
+    
+    /* Configuração da Imagem de Fundo */
+    background-size: cover; /* Garante que a imagem preencha o container */
+    background-position: center top; /* Foca o topo da imagem */
+    background-repeat: no-repeat;
+    
+    /* Overlay para escurecer a imagem e manter o Header visível */
+    position: relative; /* Essencial para o overlay */
+}
+
+/* 2. OVERLAY ESCURO (Simula uma sombra ou um gradiente escuro) */
+.filmeBanner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Gradiente que escurece mais o topo (onde fica o Header) */
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.7) 0%, /* Mais escuro no topo */
+        rgba(0, 0, 0, 0.3) 50%, 
+        rgba(0, 0, 0, 0.5) 100%); /* Um pouco escuro na base para o card */
+    z-index: 1; /* Fica acima da imagem, mas abaixo do conteúdo */
+}
+
+/* 3. ÁREA DE CONTEÚDO (Texto e Botões) */
+.bannerContent {
+    position: relative; 
+    z-index: 2; /* Fica acima do overlay */
+    
+    /* Centraliza o conteúdo (ajuste padding conforme o seu Header) */
+    padding: 100px 50px 20px 50px; 
+    color: white;
+    
+    /* Alinha o conteúdo à esquerda, como no seu protótipo */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* ... (Estilos para Título, Detalhes e Botões) ... */
+
+.tituloFilme {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.infoDetalhes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.bannerAcoes {
+    display: flex;
+    gap: 15px;
+}
+
+/* Exemplo de Botões (Ajuste as cores para seu tema roxo/azul) */
+.btnRemover {
+    background-color: #A92C55; /* Cor de destaque (vermelho/vinho) */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.btnEditar {
+    background-color: var(--azul); /* Seu azul claro */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
