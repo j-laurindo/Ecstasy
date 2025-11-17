@@ -1,27 +1,34 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import api from '../services/api';
-
+import api from '../services/api'; 
 
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [user, setUser] = useState(null);
-    const [role, setRole] = useState(null); 
+    // Consolidação de todos os estados em um único objeto (Estado Atômico)
+    const [authState, setAuthState] = useState({
+        isAuthenticated: false,
+        user: null,
+        role: null,
+        token: null,
+    });
 
     // Tenta carregar o estado do localStorage na inicialização
     useEffect(() => {
-        const token = localStorage.getItem('filminis_token');
+        const storedToken = localStorage.getItem('filminis_token');
         const userRole = localStorage.getItem('filminis_role');
 
-        if (token && userRole) {
-            // Se encontrou, assume autenticado
-            setIsAuthenticated(true);
-            setRole(userRole);
-            // Configura o token no cabeçalho da API
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        if (storedToken && userRole) {
+            api.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+            
+            // Atualiza o estado consolidado
+            setAuthState({
+                isAuthenticated: true,
+                user: { role: userRole }, 
+                role: userRole,
+                token: storedToken,
+            });
         }
     }, []);
 
@@ -29,35 +36,62 @@ export const AuthProvider = ({ children }) => {
         try {
             // Chamada à API de Login
             const response = await api.post('/login', { email, senha });
-            const { token, role, id } = response.data;
+            const { token, role, id } = response.data; 
 
             // Armazena no localStorage
             localStorage.setItem('filminis_token', token);
             localStorage.setItem('filminis_role', role);
 
-            // Atualiza o estado global
-            setIsAuthenticated(true);
-            setRole(role);
-            setUser({ id, email, role });
+            // Atualiza o estado global com o novo objeto (DISPARA A RE-RENDERIZAÇÃO)
+            setAuthState({
+                isAuthenticated: true,
+                user: { id, email, role },
+                role: role,
+                token: token,
+            });
             
-            return true;
+            // Configura o cabeçalho da API
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+            // Retorna o objeto de sucesso com o role para uso no Login.jsx
+            return { success: true, role }; 
         } catch (error) {
-            return false;
+            console.error("Erro na autenticação:", error);
+            localStorage.removeItem('filminis_token');
+            localStorage.removeItem('filminis_role');
+            
+            // Reseta o estado em caso de falha
+            setAuthState({
+                isAuthenticated: false,
+                user: null,
+                role: null,
+                token: null,
+            });
+
+            return { 
+                success: false, 
+                error: error.response?.data?.message || 'Credenciais inválidas. Tente novamente.' 
+            };
         }
     };
 
     const logout = () => {
         localStorage.removeItem('filminis_token');
         localStorage.removeItem('filminis_role');
-        setIsAuthenticated(false);
-        setUser(null);
-        setRole(null);
+        
+        delete api.defaults.headers.common['Authorization']; 
+
+        // Reseta o estado consolidado
+        setAuthState({
+            isAuthenticated: false,
+            user: null,
+            role: null,
+            token: null,
+        });
     };
 
     const value = {
-        isAuthenticated,
-        user,
-        role,
+        ...authState, // Expõe as propriedades do estado consolidado
         login,
         logout
     };

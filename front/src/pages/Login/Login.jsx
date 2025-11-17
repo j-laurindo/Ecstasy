@@ -1,54 +1,65 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './Login.css';
-import Header from '../../componentes/Header/Header';
 import Form from '../../componentes/Form/Form';
-import { authService } from '../../services/api';
+import { useAuth } from '../../context/AuthContext'; 
 
 function Login() {
-    // Estado para armazenar mensagens de erro
     const [erro, setErro] = useState('');
-    const navigate = useNavigate(); // Hook de navegação
+    const [isLoading, setIsLoading] = useState(false); 
+    const navigate = useNavigate(); 
+    const { login } = useAuth();
+    
     const handleLogin = async (email, senha) => {
-        setErro(''); 
+        setErro('');
+        setIsLoading(true); 
         
         if (!email || !senha) {
             setErro("Por favor, preencha todos os campos.");
+            setIsLoading(false); 
             return;
         }
 
         try {
-            // Chama a função de login que faz a requisição POST e armazena o token
-            const userData = await authService.login(email, senha);
+            const response = await login(email, senha);
 
-            // Lógica de Navegação (Baseada no Perfil)
-            if (userData.role === 'admin') {
-                navigate('/admin/dashboard'); // Redireciona para o painel do Admin
+            if (response && response.success) { 
+                console.log("Login Sucesso. Perfil retornado para navegação:", response.role); 
+                
+                setTimeout(() => {
+                    if (response.role === 'admin') {
+                        navigate('/admin'); 
+                    } else {
+                        navigate('/'); 
+                    }
+                    setIsLoading(false); 
+                }, 50); 
+
             } else {
-                navigate('/home'); // Redireciona para a página inicial (usuário comum)
+                setErro(response.error || 'Credenciais inválidas. Tente novamente.');
+                setIsLoading(false); 
             }
 
         } catch (error) {
-            // Tratamento de Erro
-            // A função authService.login() lança o erro da API 
             const errorMessage = error.message || error;
-            setErro(errorMessage);
+            setErro(errorMessage || 'Falha na conexão com o servidor.');
+            setIsLoading(false); 
         }
     };
 
     return (
-        <>
-            <header>
-                <Header />
-            </header>
-            <main className='paginaLogin'>
-                {/* Exibe mensagem de erro se houver */}
+        // Lembre-se de remover o <Header /> daqui, ele deve estar no Layout.jsx
+        <> 
+            <main className='paginaLogin'>                <h1 className="login-title">Acessar a Plataforma</h1>
+                
+                {isLoading && <p style={{ color: 'orange', textAlign: 'center' }}>Carregando...</p>}
+                
                 {erro && <p style={{ color: 'red', textAlign: 'center' }}>{erro}</p>}
                 
                 <Form
                     tipo="login"
-                    // Passa a função de tratamento de login para o componente Form
                     onSubmit={handleLogin} 
+                    disabled={isLoading}
                 />
             </main>
         </>

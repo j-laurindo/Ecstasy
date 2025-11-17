@@ -15,10 +15,8 @@ import PaginaNotificacoes from './pages/Notificacoes/Notificacoes';
 import PaginaAdmin from './pages/Admin/Admin.jsx'; 
 
 // --- Componentes de Guarda de Rota ---
-
 const UserRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
-    // Se não autenticado, redireciona para o Login
     return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
@@ -51,6 +49,7 @@ function App() {
                     {/* ---------------------------------------------------- */}
                     
                     <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route path="/filmes" element={<ListaFilmes />} />

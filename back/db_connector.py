@@ -17,7 +17,7 @@ class DatabaseConnector:
                 self._connection = pymysql.connect(
                     host="localhost",
                     user="root",
-                    password="0104",
+                    password="root",
                     database="Ecstasy",
                     charset="utf8mb4",
                     cursorclass=pymysql.cursors.DictCursor,
@@ -42,6 +42,6 @@ class DatabaseConnector:
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "0104",
+    "password": "root",
     "database": "Ecstasy", 
 }

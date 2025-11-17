@@ -11,9 +11,26 @@
     padding-top: 80px;
 }
 
-.fileira {
+.linhaPesquisa {
     display: flex;
-    gap: 30px;
-    padding-top: 40px;
+    width: 80%;
+    align-items: center;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+.fileira { 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    padding: 40px 0;
+    gap: 60px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: start; 
+}
+
+.gridFilmes {
+    display: flex;
     justify-content: center;
+    margin: 0 auto;
 }

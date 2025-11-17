@@ -65,12 +65,12 @@ class AuthDAO:
     def login_usuario(self, email, senha):
         cursor = mydb.cursor()
         try:
-            cursor.execute("SELECT id, email, senha, perfil FROM Usuario WHERE email=%s", (email,))
+            cursor.execute("SELECT id, email, senha_hash, perfil FROM Usuario WHERE email=%s", (email,))
             usuario = cursor.fetchone()
             
-            if usuario and usuario.get("senha") and bcrypt.checkpw(senha.encode('utf-8'), usuario["senha"].encode('utf-8')):
+            if usuario and usuario.get("senha_hash") and bcrypt.checkpw(senha.encode('utf-8'), usuario["senha_hash"].encode('utf-8')):
                 usuario['token'] = gerar_token(usuario)
-                del usuario['senha']
+                del usuario['senha_hash']
                 return usuario
             
             return None 

@@ -1,65 +1,108 @@
 import './Header.css';
-// Importe os módulos necessários
-import { Bell } from 'react-bootstrap-icons';
+import { Bell, PersonCircle } from 'react-bootstrap-icons'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 function Header(){
-    const { isAuthenticated, role, logout } = useAuth(); // Acessa o estado de Auth
-    const navigate = useNavigate(); // Hook para navegação programática (ex: após logout)
+    const { isAuthenticated, role, logout } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
-        logout(); // Chama a função do AuthContext para limpar o token
-        navigate('/login'); // Redireciona o usuário para a tela de login
+        logout(); 
+        navigate('/login'); 
     };
 
+    // 1. Navegação Principal (Links centrais)
+    const renderNavLinks = () => {
+        if (role === 'admin') {
+            return (
+                <ul className='menuLinks'>
+                    <li>
+                        <Link to="/admin">Solicitações</Link> 
+                    </li>
+                </ul>
+            );
+        }
+        
+        // Links do Usuário Comum
+        return (
+            <ul className='menuLinks'>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/filmes">Lista de Filmes</Link> 
+                </li>
+            </ul>
+        );
+    };
+
+    // 2. Controles de Autenticação (Login/Perfil/Logout)
+    const renderAuthControls = () => {
+        if (isAuthenticated) {
+            return (
+                <div className="dropdown perfil-dropdown">
+                    <button className="dropbtn" aria-label='Menu de Perfil e Logout'>
+                        <PersonCircle size={24} color='white' />
+                    </button>
+                    <div className="dropdown-content">
+                        {/* Link Perfil (Comum e Admin) */}
+                        <Link to="/perfil">Meu Perfil</Link> 
+                        
+                        {/* Link Notificações (Apenas se for usuário comum) */}
+                        {role !== 'admin' && <Link to="/notificacoes">Notificações</Link>}
+                        
+                        {/* Botão de Logout */}
+                        <button onClick={handleLogout} className="logout-button">
+                            Sair
+                        </button>
+                    </div>
+                </div>
+            );
+        } else {
+            // Links para usuários não logados
+            return (
+                <div className='menuItens'>
+                    <Link to="/login" className="btn-login">Login</Link>
+                    <Link to="/cadastro" className="btn-cadastro">Cadastro</Link>
+                </div>
+            );
+        }
+    };
+    
+    // Opcional: Renderizar o ícone de notificação
+    const renderNotificationIcon = () => {
+        if (isAuthenticated && role !== 'admin') {
+            return (
+                 <li className='notification-icon'>
+                     <Link to="/notificacoes" aria-label='Ir para a página de notificações'>
+                         <Bell color='white' size={24}/>
+                     </Link>
+                 </li>
+            );
+        }
+        return null;
+    };
+
+
     return(
-        <section className='menuHeader' aria-label='Menu de navegação do site'>
+        <header className='menuHeader' aria-label='Menu de navegação do site'>
             <h1>
                 <Link to="/">ECSTASY</Link>
             </h1>
-            <div className='menuSection'>
-                <ul className='menuLinks'>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/filmes">Filmes</Link> 
-                    </li>
-                    {role === 'user' && (
-                        <li>
-                            <Link to="/notificacoes">Notificações</Link>
-                        </li>
-                    )}
-                    {role === 'admin' && (
-                        <li>
-                            <Link to="/admin">Admin Dashboard</Link>
-                        </li>
-                    )}
-                </ul>
+            <nav className='menuSection'>
+                
+                {renderNavLinks()}
+                
                 <ul className='menuItens'>
+                    {renderNotificationIcon()} 
+                    
                     <li>
-                        <Link to="/notificacoes">
-                            <Bell color='white' size={10}/>
-                        </Link>
-                    </li>
-                    <li>
-                        {isAuthenticated ? (
-                            // SE AUTENTICADO: Mostra perfil e botão de Logout
-                            <div className='auth-controls'>
-                                <Link to="/perfil">Perfil</Link> 
-                                <button onClick={handleLogout} className="logout-button">
-                                    Logout
-                                </button>
-                            </div>
-                        ) : (
-                            // SE NÃO AUTENTICADO: Mostra o link de Login
-                            <Link to="/login">Login</Link>
-                        )}
+                        {renderAuthControls()}
                     </li>
                 </ul>
-            </div>
-        </section>
+            </nav>
+        </header>
     );
 }
 

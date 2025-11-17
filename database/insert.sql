@@ -1,4 +1,21 @@
 -- INSERT DAS TABELAS
+
+INSERT INTO Usuario (email, senha_hash, perfil)
+VALUES 
+(
+    'user@email.com',
+    '$2b$12$U8LGIgznG040HBZCoC48A.WRpYctP5gz38Cn/OJuynGBDEOcaR75O', 
+    'user'
+);
+
+INSERT INTO Usuario (email, senha_hash, perfil)
+VALUES 
+(
+    'admin@emailcom',
+    '$2b$12$ZNuHMBM8DbTEat.AILEuj.KPLriX1rExo9bcJsVbKQ8RnzbrGEgka', 
+    'admin'
+);
+
 -- #################################
 -- ETAPA 1: INSERÇÃO DE DADOS DE CATÁLOGO
 -- #################################
