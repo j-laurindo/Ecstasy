@@ -1,43 +1,66 @@
-// src/context/AuthContext.jsx
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import api from '../services/api';
 
-// 1. Cria o Contexto
+
 const AuthContext = createContext();
 
-// DADOS MOCKADOS para simular os diferentes usuários
-const MOCKED_USERS = {
-    deslogado: { isLoggedIn: false, role: null, username: null },
-    user: { isLoggedIn: true, role: 'user', username: 'João Comum' },
-    admin: { isLoggedIn: true, role: 'admin', username: 'Dr. Admin' },
-};
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    // Estado inicial: Usuário Deslogado
-    const [user, setUser] = useState(MOCKED_USERS.deslogado);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(null);
+    const [role, setRole] = useState(null); 
 
-    /**
-     * Função mockada para simular o login/logout e a troca de roles.
-     * @param {string} role - 'admin', 'user', ou 'logout'
-     */
-    const mockLogin = (role) => {
-        if (role === 'admin') {
-            setUser(MOCKED_USERS.admin);
-        } else if (role === 'user') {
-            setUser(MOCKED_USERS.user);
-        } else {
-            setUser(MOCKED_USERS.deslogado); // Simula o logout
+    // Tenta carregar o estado do localStorage na inicialização
+    useEffect(() => {
+        const token = localStorage.getItem('filminis_token');
+        const userRole = localStorage.getItem('filminis_role');
+
+        if (token && userRole) {
+            // Se encontrou, assume autenticado
+            setIsAuthenticated(true);
+            setRole(userRole);
+            // Configura o token no cabeçalho da API
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        }
+    }, []);
+
+    const login = async (email, senha) => {
+        try {
+            // Chamada à API de Login
+            const response = await api.post('/login', { email, senha });
+            const { token, role, id } = response.data;
+
+            // Armazena no localStorage
+            localStorage.setItem('filminis_token', token);
+            localStorage.setItem('filminis_role', role);
+
+            // Atualiza o estado global
+            setIsAuthenticated(true);
+            setRole(role);
+            setUser({ id, email, role });
+            
+            return true;
+        } catch (error) {
+            return false;
         }
     };
 
-    return (
-        <AuthContext.Provider value={{ user, mockLogin }}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
+    const logout = () => {
+        localStorage.removeItem('filminis_token');
+        localStorage.removeItem('filminis_role');
+        setIsAuthenticated(false);
+        setUser(null);
+        setRole(null);
+    };
 
-// 2. Hook Customizado para consumo (De onde o `useAuth` está vindo)
-export const useAuth = () => {
-    // Retorna o valor do contexto (user e mockLogin)
-    return useContext(AuthContext);
+    const value = {
+        isAuthenticated,
+        user,
+        role,
+        login,
+        logout
+    };
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
