@@ -64,10 +64,12 @@ function Home() {
                     <section className='fileirasFilmes'>
                         <section className='filmesHome'>
                             <SliderFilmes
-                            titulo="Últimos lançamentos"/>
+                            titulo="Últimos lançamentos"
+                            />
 
                             <SliderFilmes
-                            titulo="Filmes mais assistidos em Novembro"/>
+                            titulo="Filmes mais assistidos em Novembro"
+                            />
                         </section>
                     </section>
                 </main>

@@ -4,7 +4,7 @@ function Footer() {
     return(
         <section className='footer'>
             <section className='colunaLogo'>
-                <h1>LOGO</h1>
+                <img src="../../../assets/images/logo.png" alt="Logo Ecstasy" className='logoFooter' />
                 <span>© 2025 Ecstasy. Todos os direitos reservados.</span>
             </section> 
             <section className='colunaLinks'>

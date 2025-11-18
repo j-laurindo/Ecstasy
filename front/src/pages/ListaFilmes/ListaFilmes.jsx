@@ -4,8 +4,8 @@ import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext'; 
 
 import './ListaFilmes.css';
-import Header from '../../componentes/Header/Header'; // MANTIDO A PEDIDO
-import Footer from '../../componentes/Footer/Footer'; // MANTIDO A PEDIDO
+import Header from '../../componentes/Header/Header'; 
+import Footer from '../../componentes/Footer/Footer'; 
 import TituloPagina from '../../componentes/TituloPagina/TituloPagina';
 import CardFilme from '../../componentes/CardFilme/CardFilme';
 import Filtros from '../../componentes/Filtros/Filtros'; 
@@ -19,7 +19,7 @@ function ListaFilmes() {
     // ESTADOS
     const [allMovies, setAllMovies] = useState([]); 
     const [searchTerm, setSearchTerm] = useState(''); 
-    const [selectedGenre, setSelectedGenre] = useState(''); 
+    const [generoSelecionado, setGeneroSelecionado] = useState(''); 
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -29,7 +29,6 @@ function ListaFilmes() {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                // Busca todos os filmes
                 const response = await api.get('/filmes'); 
                 setAllMovies(response.data);
                 setIsLoading(false);
@@ -42,12 +41,12 @@ function ListaFilmes() {
         fetchMovies();
     }, []);
 
-    const filteredMovies = useMemo(() => {
+    const filtroFilmes = useMemo(() => {
         let result = allMovies;
 
-        if (selectedGenre && selectedGenre !== 'Todos') {
+        if (generoSelecionado && generoSelecionado !== 'Todos') {
             result = result.filter(movie => 
-                movie.genero === selectedGenre
+                movie.genero === generoSelecionado
             );
         }
 
@@ -63,9 +62,8 @@ function ListaFilmes() {
         }
 
         return result;
-    }, [allMovies, searchTerm, selectedGenre]); 
+    }, [allMovies, searchTerm, generoSelecionado]); 
 
-    // HANDLERS DE EVENTOS
     const handleAddMovieClick = () => {
         navigate('/registrar'); 
     };
@@ -75,7 +73,7 @@ function ListaFilmes() {
     };
 
     const handleGenreChange = (event) => {
-        setSelectedGenre(event.target.value);
+        setgeneroSelecionado(event.target.value);
     };
 
     // RENDERIZAÇÃO DE STATUS E CARDS
@@ -88,16 +86,18 @@ function ListaFilmes() {
     }
 
     const renderMovieCards = () => {
-        if (filteredMovies.length === 0) {
+        if (filtroFilmes.length === 0) {
             return <p className="semResultado">Nenhum filme encontrado com os filtros e pesquisa aplicados.</p>;
         }
 
         // Renderiza a lista de cards dinamicamente
         return (
             <div className='fileira'> 
-                {filteredMovies.map(movie => (
+                {filtroFilmes.map(movie => (
                     <CardFilme 
                         key={movie.id} 
+                        id={movie.id}
+                        urlImagem={movie.poster} 
                         titulo={movie.titulo} 
                         ano={`(${movie.ano || 'Indefinido'})`} 
                     />
@@ -117,16 +117,14 @@ function ListaFilmes() {
                     titulo="Lista de Filmes"
                 />
 
-                {/* FILTROS: Você precisa passar a lógica para o componente Filtros.jsx */}
                 <Filtros 
                     genres={availableGenres} 
-                    selectedGenre={selectedGenre}
+                    generoSelecionado={generoSelecionado}
                     onGenreChange={handleGenreChange} 
                 />
 
                 <section className='listaFilmes'>
                     <div className='linhaPesquisa'>
-                        {/* BARRA DE PESQUISA: Você precisa passar a lógica para o componente BarraPesquisa.jsx */}
                         <BarraPesquisa 
                             value={searchTerm}
                             onChange={handleSearchChange} 
@@ -152,7 +150,7 @@ function ListaFilmes() {
             </main>
             
             <footer>
-                <Footer/> {/* MANTIDO */}
+                <Footer/> 
             </footer>
         </>
     );

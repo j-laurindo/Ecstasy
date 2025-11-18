@@ -1,5 +1,5 @@
-// FilmesRecomendados.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../services/api'; 
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,102 +7,129 @@ import { ArrowRightCircle, ArrowLeftCircle } from 'react-bootstrap-icons';
 import CardFilme from '../CardFilme/CardFilme'; 
 import './SliderFilmes.css'; 
 
-// Dados de simulação
-const mockFilmes = [
-    { id: 1, titulo: "O Telefone Preto 2", ano: 2025, posterUrl: 'URL_1' },
-    { id: 2, titulo: "Se Não Fosse Você", ano: 2025, posterUrl: 'URL_2' },
-    { id: 3, titulo: "A Meia Irmã Feia", ano: 2025, posterUrl: 'URL_3' },
-    { id: 4, titulo: "Frankenstein", ano: 2025, posterUrl: 'URL_4' },
-    { id: 5, titulo: "Outro Filme 1", ano: 2025, posterUrl: 'URL_5' },
-    { id: 6, titulo: "O Telefone Preto 2", ano: 2025, posterUrl: 'URL_1' },
-    { id: 7, titulo: "Se Não Fosse Você", ano: 2025, posterUrl: 'URL_2' },
-    { id: 8, titulo: "A Meia Irmã Feia", ano: 2025, posterUrl: 'URL_3' },
-    { id: 9, titulo: "Frankenstein", ano: 2025, posterUrl: 'URL_4' },
-    { id: 10, titulo: "Outro Filme 1", ano: 2025, posterUrl: 'URL_5' },
-];
-
-
-
-// Componente para a Seta de Próximo
 const NextArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", right: "-55px", top: '45%' }} 
-      onClick={onClick}
-    >
-      <ArrowRightCircle color='var(--branco)' className='arrow-icon' /> 
-    </div>
-  );
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{ ...style, display: "block", right: "-55px", top: '45%' }} 
+            onClick={onClick}
+        >
+            <ArrowRightCircle color='var(--branco)' className='arrow-icon' /> 
+        </div>
+    );
 };
 
-// Componente para a Seta Anterior
 const PrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", left: "-55px", top: '45%' }}
-      onClick={onClick}
-    >
-      <ArrowLeftCircle size={50} color='var(--branco)' className='arrow-icon' /> 
-    </div>
-  );
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{ ...style, display: "block", left: "-55px", top: '45%' }}
+            onClick={onClick}
+        >
+            <ArrowLeftCircle size={50} color='var(--branco)' className='arrow-icon' /> 
+        </div>
+    );
 };
 
+function SliderFilmes({ titulo, filterParams = {} }) {
+    
+    const [filmes, setFilmes] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-function SliderFilmes({titulo}) {
-    const settings = {
-        className: "center",
-        centerMode: true,
-        infinite: true,
-        centerPadding: "80px", 
-        slidesToShow: 3,       
-        speed: 500,
-        nextArrow: <NextArrow />, 
-        prevArrow: <PrevArrow />,
-        responsive: [          
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    centerPadding: "40px",
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                    centerPadding: "100px", 
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    centerPadding: "50px", 
-                }
-            }
-        ]
-    };
-    
-    return (
-        <div className='SliderFilmes'> 
-            <h1 className='tituloSlider'>{titulo}</h1>
-            <Slider {...settings} className="carrosselSlick">
-                {mockFilmes.map((filme) => (
-                    <div key={filme.id} className="slideItemWrapper">
-                        <CardFilme urlImagem={filme.posterUrl} />
-                        <div className='info'>
-                            <p className="tituloCard">{filme.titulo}</p>
-                            <p className="anoCard">({filme.ano})</p>
-                        </div>
-                    </div>
-                ))}
-            </Slider>
-        </div>
-    );
+    useEffect(() => {
+       const fetchFilmes = async () => {
+          setIsLoading(true);
+          setError(null);
+
+          const params = new URLSearchParams();
+          
+          Object.entries(filterParams).forEach(([key, value]) => {
+              if (value) { 
+                  params.append(key, value);
+              }
+          });
+
+          const queryString = params.toString();
+          const url = `/filmes${queryString ? '?' + queryString : ''}`;
+            try {
+                const response = await api.get(url);
+                setFilmes(response.data);
+            } catch (err) {
+                console.error("Erro ao carregar filmes para o slider:", err);
+                setError("Não foi possível carregar os filmes. Verifique a API.");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchFilmes();
+    }, [filterParams]); 
+    
+    const settings = {
+        className: "center",
+        centerMode: true,
+        infinite: true,
+        centerPadding: "80px", 
+        slidesToShow: 3, 
+        speed: 500,
+        nextArrow: <NextArrow />, 
+        prevArrow: <PrevArrow />,
+        responsive: [          
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    centerPadding: "40px",
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    centerPadding: "100px", 
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    centerPadding: "50px", 
+                }
+            }
+        ]
+    };
+    
+    if (isLoading) {
+        return <div className="SliderFilmes loading-state">Carregando {titulo.toLowerCase()}...</div>;
+    }
+
+    if (error) {
+        return <div className="SliderFilmes error-state">Erro ao carregar filmes: {error}</div>;
+    }
+    
+    if (filmes.length === 0) {
+        return <div className="SliderFilmes no-results-state">Não há filmes para esta categoria.</div>;
+    }
+    
+    return (
+        <div className='SliderFilmes'> 
+            <h1 className='tituloSlider'>{titulo}</h1>
+            <Slider {...settings} className="carrosselSlick">
+                {filmes.map((filme) => (
+                    <div key={filme.id} className="slideItemWrapper">
+                        <CardFilme urlImagem={filme.poster} titulo={filme.titulo} ano={filme.ano}/> 
+                        <div className='info'>
+                            <p className="tituloCard">{filme.titulo}</p>
+                            <p className="anoCard">({filme.ano || 'Indefinido'})</p>
+                        </div>
+                    </div>
+                ))}
+            </Slider>
+        </div>
+    );
 }
 
 export default SliderFilmes;

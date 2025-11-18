@@ -1,41 +1,40 @@
-/* Estilos básicos do Header (mantendo o seu visual) */
 .menuHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: #1a1a1a; /* Exemplo: Fundo escuro */
-    color: white;
+    padding: 40px 110px 10px 110px;
+    background: transparent;
+    color: var(--branco);
 }
 
 .menuHeader h1 a {
     text-decoration: none;
-    color: #e50914; /* Cor de destaque (Netflix-like) */
+    color: var(--branco); /* Cor de destaque (Netflix-like) */
     font-size: 1.8rem;
 }
 
 .menuSection {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 50px;
 }
 
 .menuLinks {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 30px;
     margin: 0;
     padding: 0;
 }
 
 .menuLinks a, .menuItens a {
-    color: white;
+    color: var(--branco);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .menuLinks a:hover, .menuItens a:hover {
-    color: #e50914;
+    color: var(--azul);
 }
 
 .menuItens {
@@ -45,6 +44,11 @@
     gap: 1rem;
     margin: 0;
     padding: 0;
+}
+
+.logoHeader {
+    height: 90px; /* Ajuste conforme necessário */
+    width: auto;
 }
 
 /* --- Estilos do Dropdown de Perfil --- */
@@ -67,7 +71,7 @@
     background-color: #333;
 }
 
-.dropdown-content {
+.conteudoDropdown {
     display: none;
     position: absolute;
     right: 0;
@@ -79,8 +83,8 @@
     overflow: hidden;
 }
 
-.dropdown-content a,
-.dropdown-content button {
+.conteudoDropdown a,
+.conteudoDropdown button {
     color: white;
     padding: 12px 16px;
     text-decoration: none;
@@ -93,13 +97,13 @@
     transition: background-color 0.3s;
 }
 
-.dropdown-content a:hover,
-.dropdown-content button:hover {
+.conteudoDropdown a:hover,
+.conteudoDropdown button:hover {
     background-color: #555;
 }
 
 /* Mostra o menu suspenso quando o mouse passa sobre o contêiner dropdown */
-.dropdown:hover .dropdown-content {
+.dropdown:hover .conteudoDropdown {
     display: block;
 }
 

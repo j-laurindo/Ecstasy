@@ -2,6 +2,8 @@ import './Header.css';
 import { Bell, PersonCircle } from 'react-bootstrap-icons'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import Botao from '../Botao/Botao';
+import Logo from '../../assets/images/logo.png';
 
 function Header(){
     const { isAuthenticated, role, logout } = useAuth();
@@ -12,7 +14,6 @@ function Header(){
         navigate('/login'); 
     };
 
-    // 1. Navegação Principal (Links centrais)
     const renderNavLinks = () => {
         if (role === 'admin') {
             return (
@@ -24,7 +25,6 @@ function Header(){
             );
         }
         
-        // Links do Usuário Comum
         return (
             <ul className='menuLinks'>
                 <li>
@@ -37,7 +37,6 @@ function Header(){
         );
     };
 
-    // 2. Controles de Autenticação (Login/Perfil/Logout)
     const renderAuthControls = () => {
         if (isAuthenticated) {
             return (
@@ -45,14 +44,11 @@ function Header(){
                     <button className="dropbtn" aria-label='Menu de Perfil e Logout'>
                         <PersonCircle size={24} color='white' />
                     </button>
-                    <div className="dropdown-content">
-                        {/* Link Perfil (Comum e Admin) */}
+                    <div className="conteudoDropdown">
                         <Link to="/perfil">Meu Perfil</Link> 
                         
-                        {/* Link Notificações (Apenas se for usuário comum) */}
                         {role !== 'admin' && <Link to="/notificacoes">Notificações</Link>}
                         
-                        {/* Botão de Logout */}
                         <button onClick={handleLogout} className="logout-button">
                             Sair
                         </button>
@@ -60,21 +56,23 @@ function Header(){
                 </div>
             );
         } else {
-            // Links para usuários não logados
             return (
                 <div className='menuItens'>
-                    <Link to="/login" className="btn-login">Login</Link>
-                    <Link to="/cadastro" className="btn-cadastro">Cadastro</Link>
+                    <Link to="/login">
+                    <Botao 
+                        conteudo="Login"
+                        className='azul'
+                    />
+                    </Link>
                 </div>
             );
         }
     };
     
-    // Opcional: Renderizar o ícone de notificação
     const renderNotificationIcon = () => {
         if (isAuthenticated && role !== 'admin') {
             return (
-                 <li className='notification-icon'>
+                 <li className='iconeNotificacao'>
                      <Link to="/notificacoes" aria-label='Ir para a página de notificações'>
                          <Bell color='white' size={24}/>
                      </Link>
@@ -88,7 +86,7 @@ function Header(){
     return(
         <header className='menuHeader' aria-label='Menu de navegação do site'>
             <h1>
-                <Link to="/">ECSTASY</Link>
+                <Link to="/"><img src={Logo} alt="Ecstasy Logo" className='logoHeader'/></Link>
             </h1>
             <nav className='menuSection'>
                 

@@ -1,5 +1,5 @@
-// Carrossel.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../services/api'; // Importa o serviço de API
 import Slider from 'react-slick';
 import CardCarrossel from '../CardCarrossel/CardCarrossel';
 import { ArrowLeftCircle, ArrowRightCircle } from 'react-bootstrap-icons';
@@ -7,30 +7,63 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './Carrossel.css'; 
 
-
+// Componentes de seta personalizados
 const NextArrow = (props) => <div className={props.className} style={{ ...props.style, right: "100px"}} onClick={props.onClick}><ArrowRightCircle size={24} className="arrow-icon right" /></div>;
 const PrevArrow = (props) => <div className={props.className} style={{ ...props.style, left: "100px"}} onClick={props.onClick}><ArrowLeftCircle size={24} className="arrow-icon left" /></div>;
 
-const mockFilmes = [
-    { id: 1, titulo: "O Telefone Preto", categoria: "Suspense", sinopse: "Pesadelos assombram Gwen, de 15 anos, enquanto ela recebe chamadas do telefone preto e tem visões perturbadoras...", posterUrl: 'https://br.web.img2.acsta.net/img/8d/f3/8df3f4de748e61ea7311db6f8fc1d455.jpg', ano: '2025' },
-    { id: 2, titulo: "A Meia Irmã Feia", categoria: "Comédia, Musical", sinopse: "Dois irmãos inseparáveis descobrem uma irmã há muito perdida, resultando em caos familiar e música pop.", posterUrl: 'https://br.web.img2.acsta.net/img/8d/f3/8df3f4de748e61ea7311db6f8fc1d455.jpg', ano: '2025' },
-    { id: 3, titulo: "ONCE UPON A TIME...", categoria: "Faroeste, Drama", sinopse: "Um ator de TV e seu dublê tentam fazer sucesso na indústria cinematográfica durante os assassinatos de Manson.", posterUrl: 'https://br.web.img2.acsta.net/img/8d/f3/8df3f4de748e61ea7311db6f8fc1d455.jpg', ano: '2019' },
-    { id: 4, titulo: "FRANKENSTEIN", categoria: "Ficção Científica, Clássico", sinopse: "Uma reimaginação da criatura de Mary Shelley, focada na busca por identidade e aceitação em um mundo moderno.", posterUrl: 'https://br.web.img2.acsta.net/img/8d/f3/8df3f4de748e61ea7311db6f8fc1d455.jpg', ano: '2025' },
-];
-const TOTAL_FILMES = mockFilmes.length;
-
-if (TOTAL_FILMES === 0) {
-    console.error("mockFilmes está vazio! O carrossel não será renderizado.");
-}
-// --------------------------------------------------------------------------
 
 function Carrossel() {
+    // 1. Estados para os filmes e o status de carregamento
+    const [filmes, setFilmes] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0); 
-    
-    if (TOTAL_FILMES === 0) {
-        return <div style={{ color: 'red', textAlign: 'center', padding: '50px' }}>Erro: Nenhuma mídia para exibir no carrossel.</div>;
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Variáveis de filtro fixas para o carrossel de destaque
+    const ANO_DESTAQUE = 2025;
+    const LIMITE_FILMES = 5;
+
+    // 2. Efeito para buscar os dados ao montar o componente
+    useEffect(() => {
+        const fetchFilmesDestaque = async () => {
+            setIsLoading(true);
+            setError(null);
+
+            const url = `/filmes?ano=${ANO_DESTAQUE}&limit=${LIMITE_FILMES}`;
+            
+            try {
+                const response = await api.get(url);
+                
+                const filmesLimitados = response.data.slice(0, LIMITE_FILMES); 
+                
+                setFilmes(filmesLimitados);
+            } catch (err) {
+                console.error("Erro ao carregar filmes para o Carrossel:", err);
+                setError("Não foi possível carregar os filmes em destaque.");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchFilmesDestaque();
+    }, []); 
+
+    const TOTAL_FILMES = filmes.length;
+
+    if (isLoading) {
+        return <div className="carouselDestaqueContainer loading-state">Carregando {LIMITE_FILMES} filmes de {ANO_DESTAQUE}...</div>;
     }
 
+    if (error) {
+        return <div className="carouselDestaqueContainer error-state" style={{ color: 'red', textAlign: 'center', padding: '50px' }}>Erro: {error}</div>;
+    }
+
+    if (TOTAL_FILMES === 0) {
+        return <div className="carouselDestaqueContainer no-results-state" style={{ textAlign: 'center', padding: '50px' }}>Nenhum filme de {ANO_DESTAQUE} encontrado para destaque.</div>;
+    }
+
+
+    // 4. Configurações do Slider (usando o TOTAL_FILMES do estado)
     const settings = {
         centerMode: true,
         infinite: true,
@@ -42,15 +75,13 @@ function Carrossel() {
         prevArrow: <PrevArrow />,
         
         afterChange: (current) => {
-            setActiveIndex(current % TOTAL_FILMES);
+            setActiveIndex(current % TOTAL_FILMES); 
         },
     };
-
     return (
         <div className='carouselDestaqueContainer'>
             <Slider {...settings} className="sliderDestaque">
-                {/* 🎯 O MAPEAMENTO CORRETO AQUI */}
-                {mockFilmes.map((filme, index) => (
+                {filmes.map((filme, index) => (
                     <div key={filme.id} className="slideWrapper">
                         <CardCarrossel 
                             filme={filme} 
