@@ -19,10 +19,23 @@
     border-radius: 15px;
 }
 
+.cardLink {
+    text-decoration: none;
+}
+
+.infoFilme {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
 .infoFilme h1 {
     color: var(--branco);
     font-size: 25px;
     font-weight: 600;
+    text-transform: capitalize;
+    line-height: 1.2;
     width: 300px;
 }
 

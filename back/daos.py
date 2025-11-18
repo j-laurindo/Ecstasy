@@ -145,7 +145,39 @@ class FilmeDAO:
         finally:
             cursor.close()
 
-    # === READ (R) - carregar_filmes_filtrados (NOVO MÉTODO) ===
+    # === READ (R) - carregar_filmes_por_id ===
+    def carregar_filme_por_id(self, filme_id):
+        cursor = mydb.cursor()
+        try:
+            cursor.execute("""
+                    SELECT 
+                        f.id, f.titulo, f.tempo_duracao, f.poster, f.sinopse, f.logo,
+                        a.ano, d.nome AS diretor_nome, l.nome AS linguagem_nome,
+                        GROUP_CONCAT(DISTINCT g.nome SEPARATOR ',') AS generos,
+                        GROUP_CONCAT(DISTINCT atr.nome SEPARATOR ',') AS atores
+                    FROM Filme f
+                    JOIN Ano a ON f.ano_id = a.id
+                    JOIN Diretor d ON f.diretor_id = d.id
+                    JOIN Linguagem l ON f.linguagem_id = l.id
+                    LEFT JOIN Filme_Genero fg ON f.id = fg.filme_id
+                    LEFT JOIN Genero g ON fg.genero_id = g.id
+                    LEFT JOIN Filme_Ator fatr ON f.id = fatr.filme_id
+                    LEFT JOIN Ator atr ON fatr.ator_id = atr.id
+                    WHERE f.id = %s  /* <-- A CHAVE ESTÁ AQUI */
+                    GROUP BY f.id
+            """, (filme_id,)) 
+
+            resultado = cursor.fetchone()
+
+            if resultado:
+                resultado['generos'] = [g.strip() for g in resultado['generos'].split(',')] if resultado.get('generos') else []
+                resultado['atores'] = [a.strip() for a in resultado['atores'].split(',')] if resultado.get('atores') else []
+
+            return resultado 
+        finally:
+            cursor.close()
+
+    # === READ (R) - carregar_filmes_filtrados ===
     def carregar_filmes_filtrados(self, filtros, limit=None):
         cursor = mydb.cursor()
         try:

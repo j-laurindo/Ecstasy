@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api'; 
 import { useAuth } from '../../context/AuthContext'; 
-
 import './ListaFilmes.css';
 import Header from '../../componentes/Header/Header'; 
 import Footer from '../../componentes/Footer/Footer'; 
@@ -23,7 +22,6 @@ function ListaFilmes() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Gêneros de exemplo/mock
     const availableGenres = ['Todos', 'Ação', 'Comédia', 'Drama', 'Ficção Científica', 'Terror', 'Romance'];
 
     useEffect(() => {

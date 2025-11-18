@@ -1,4 +1,3 @@
-# handlers.py
 import json
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
@@ -43,12 +42,23 @@ class APIHandler(BaseHTTPRequestHandler):
             path = parsed.path
             path_parts = path.strip("/").split("/")
 
-            # GET /filmes (Público)
-            if path_parts[0] == "filmes":
+            # 1. GET /filmes (Público - Lista de filmes)
+            if path == "/filmes":
                 filmes = filme_dao.carregar_filmes()
                 return self._send_json(filmes) 
+            
+            # 2. GET /filmes/:id (Público - Detalhes de um filme)
+            if len(path_parts) == 2 and path_parts[0] == "filmes" and path_parts[1].isdigit():
+                filme_id = int(path_parts[1])
+                filme = filme_dao.carregar_filme_por_id(filme_id) # 👈 CHAMADA CORRETA
+                
+                if filme:
+                    return self._send_json(filme)
+                else:
+                    return self._send_error("Filme não encontrado", 404)
 
-            # GET /admin/solicitacoes (Apenas Admin)
+
+            # 3. GET /admin/solicitacoes (Apenas Admin)
             if path == "/admin/solicitacoes":
                 token_data = validar_token(self.headers)
                 if not token_data or token_data.get("role") != "admin":
@@ -60,6 +70,7 @@ class APIHandler(BaseHTTPRequestHandler):
             return self._send_error("Rota não encontrada", 404)
 
         except Exception as e:
+            # Captura exceções como problemas de DB ou falha de parseamento
             return self._send_error(f"Erro interno do servidor (GET): {str(e)}", 500)
 
     # === POST (CREATE & LOGIN) ===

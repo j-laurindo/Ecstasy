@@ -1,39 +1,32 @@
-import React, { useState, useEffect } from 'react'; // 👈 NOVAS IMPORTAÇÕES
-import { useParams } from 'react-router-dom'; // 👈 NOVA IMPORTAÇÃO
-import api from '../../services/api'; // 👈 NOVA IMPORTAÇÃO
+import React, { useState, useEffect } from 'react'; 
+import { useParams } from 'react-router-dom';
+import api from '../../services/api'; 
 import { StarFill, Clock } from 'react-bootstrap-icons'; 
 
 import './PaginaFilme.css';
 import Header from '../../componentes/Header/Header';
-// import CardFilme from '../../componentes/CardFilme/CardFilme'; // CardFilme removido por ser redundante na página de detalhes
 import TituloGradiente from '../../componentes/TituloGradiente/TituloGradiente';
 import Botao from '../../componentes/Botao/Botao';
 import SliderFilmes from '../../componentes/SliderFilmes/SliderFilmes';
 import Footer from '../../componentes/Footer/Footer';
 
 function PaginaFilme() {
-    // 1. CAPTURA O ID DA URL
     const { id } = useParams(); 
-    
-    // 2. ESTADOS DINÂMICOS
     const [filme, setFilme] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // 3. EFEITO PARA BUSCAR DADOS DA API
     useEffect(() => {
-        if (!id) return; // Não faz nada se não houver ID
+        if (!id) return; 
 
         const fetchFilmeDetails = async () => {
             setIsLoading(true);
             setError(null);
             try {
-                // Requisição para buscar um filme específico: /filmes/123
                 const response = await api.get(`/filmes/${id}`); 
                 setFilme(response.data);
             } catch (err) {
                 console.error(`Erro ao carregar filme ${id}:`, err);
-                // Define uma mensagem de erro se a requisição falhar
                 setError("Não foi possível carregar os detalhes do filme. Verifique o ID e a API.");
             } finally {
                 setIsLoading(false);
@@ -41,12 +34,8 @@ function PaginaFilme() {
         };
 
         fetchFilmeDetails();
-    }, [id]); // Roda sempre que o ID na URL muda
-    
-    // Assumimos que o objeto filme retornado da API é similar ao mock, 
-    // mas com as propriedades: titulo, ano, duracao, diretor, sinopse, poster, banner, logo, generos (array)
+    }, [id]); 
 
-    // 4. RENDERIZAÇÃO DE ESTADOS
     if (isLoading) {
         return <div className="filme-status loading-state">Carregando detalhes do filme...</div>;
     }
@@ -59,23 +48,21 @@ function PaginaFilme() {
         return <div className="filme-status not-found-state">Filme não encontrado ou o ID está incorreto.</div>;
     }
 
-    // 5. DESESTRUTURAÇÃO (Para usar os dados da API)
-    // Mapeamento dos nomes do mock para nomes mais comuns ou mantendo os do mock:
     const { 
         titulo, 
         ano, 
-        duracao, 
-        nota, 
-        idioma, 
-        diretor, 
+        tempo_duracao: duracao, 
+        linguagem_nome: idioma, 
+        diretor_nome: diretor, 
         atores, 
         sinopse,
-        imagemBannerUrl, // Tem que criar
         poster, 
         logo,
         generos 
     } = filme;
     
+    const bannerUrl = poster || "https://placehold.co/1920x400/181818/FFF?text=Fundo+do+Filme+Indisponível";
+
     const generosArray = Array.isArray(generos) ? generos : [];
 
     return (
@@ -85,7 +72,7 @@ function PaginaFilme() {
             </header>
             <div 
                 className='bannerIntegrado'
-                style={{ backgroundImage: `url(${imagemBannerUrl})` }} 
+                style={{ backgroundImage: `url(${bannerUrl})` }} 
             >
                 <div className='bannerOverlay'>
                     <div className='bannerContent'>
@@ -93,7 +80,7 @@ function PaginaFilme() {
                             src={logo} 
                             alt={`Logo do filme ${titulo}`} 
                             className='logoFilme' 
-                        />                       
+                        />          
                         <div className='infoDetalhes'>
                             <span>{ano}</span>
                             <span>|</span>
@@ -103,11 +90,6 @@ function PaginaFilme() {
                             </div>
                             <span>|</span>
                             <span className='idioma'>{idioma}</span>
-                            <span>|</span>
-                            <div className='nota'>
-                                <StarFill size={16} color="#FFD700" />
-                                <span>{nota || 'N/A'}</span>
-                            </div>
                         </div>
 
                         <div className='bannerButtons'>
@@ -171,6 +153,7 @@ function PaginaFilme() {
                         titulo2="semelhantes"
                         descricao="Confira nossas recomendações para você"
                     />
+                    {/* A alteração foi feita aqui: adicionando '|| '' ' para garantir que a propriedade 'genero' seja uma string e não 'undefined'. */}
                     <SliderFilmes filterParams={{ genero: generosArray[0] || '' }} />
                 </section>
             </main>

@@ -48,6 +48,18 @@
     cursor: pointer;
 }
 
-.logoFooter {
-    width: 150px;
+.logoFooter img {
+    height: 90px; 
+    width: auto;
+}
+
+.footerLink li, .footerLink {
+    color: var(--branco);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footerLink li:hover {
+    color: var(--branco);
+    font-weight: 600;
 }

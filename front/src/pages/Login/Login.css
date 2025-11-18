@@ -3,11 +3,68 @@ body {
 }
 
 .paginaLogin {
-    padding: 120px;
     display: flex;
+    width: 100%;
+    padding: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
     align-items: center;
     justify-content: center;
 }
 
+.tituloLogin h1{
+    color: var(--branco);
+}
 
+.msgErro {
+    margin-top: -30px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--rosa-escuro);
+    color: var(--branco);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.msgErro:hover {
+    background-color: var(--rosa-claro);
+    color: var(--branco);
+}
+
+.msgLoading {
+    margin-top: -30px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--cinza);
+    color: var(--preto);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.msgLoading:hover {
+    background-color: var(--azul);
+    color: var(--branco);
+}
+
+.headerLogin {
+    position: absolute; /* Para posicionar o botão em relação à tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    z-index: 10; /* Garante que fique acima de outros elementos */
+}
+
+.botaoVoltar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.botaoVoltar:hover {
+    opacity: 0.8;
+}
 

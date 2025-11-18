@@ -1,10 +1,12 @@
 import './Footer.css';
+import Logo from '../../assets/images/logo.png';
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return(
         <section className='footer'>
             <section className='colunaLogo'>
-                <img src="../../../assets/images/logo.png" alt="Logo Ecstasy" className='logoFooter' />
+                <img src={Logo} alt="Logo Ecstasy" className='logoFooter' />
                 <span>© 2025 Ecstasy. Todos os direitos reservados.</span>
             </section> 
             <section className='colunaLinks'>
@@ -12,11 +14,9 @@ function Footer() {
                     <nav className='navLinks' aria-label='Navegação de páginas do Rodapé'>
                         <h3>Páginas</h3>
                         <ul>
-                            <li>Home</li>
-                            <li>Filmes</li>
-                            <li>Sobre Nós</li>
-                            <li>Contato</li>
-                            <li>Login</li>
+                            <Link to="/" className='footerLink'><li>Home</li></Link>
+                            <Link to="/filmes" className='footerLink'><li>Lista de Filmes</li></Link>
+                            <Link to="/login" className='footerLink'><li>Login</li></Link>
                         </ul>
                     </nav>
                 </div>

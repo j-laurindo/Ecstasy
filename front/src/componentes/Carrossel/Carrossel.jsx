@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api'; // Importa o serviço de API
 import Slider from 'react-slick';
-import CardCarrossel from '../CardCarrossel/CardCarrossel';
+import CardCarrossel from '../CardCarrossel/CardCarrossel'; 
+import { Link } from 'react-router-dom';
 import { ArrowLeftCircle, ArrowRightCircle } from 'react-bootstrap-icons';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -80,6 +81,7 @@ function Carrossel() {
     };
     return (
         <div className='carouselDestaqueContainer'>
+            <Link to='/filmes'>
             <Slider {...settings} className="sliderDestaque">
                 {filmes.map((filme, index) => (
                     <div key={filme.id} className="slideWrapper">
@@ -90,6 +92,7 @@ function Carrossel() {
                     </div>
                 ))}
             </Slider>
+            </Link>
         </div>
     );
 }

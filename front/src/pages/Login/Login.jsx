@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import { ArrowLeftCircle } from 'react-bootstrap-icons'; 
 import './Login.css';
 import Form from '../../componentes/Form/Form';
 import { useAuth } from '../../context/AuthContext'; 
@@ -9,6 +10,10 @@ function Login() {
     const [isLoading, setIsLoading] = useState(false); 
     const navigate = useNavigate(); 
     const { login } = useAuth();
+    
+    const handleVoltar = () => {
+        navigate(-1); 
+    };
     
     const handleLogin = async (email, senha) => {
         setErro('');
@@ -48,13 +53,21 @@ function Login() {
     };
 
     return (
-        // Lembre-se de remover o <Header /> daqui, ele deve estar no Layout.jsx
         <> 
-            <main className='paginaLogin'>                <h1 className="login-title">Acessar a Plataforma</h1>
+            <header className="headerLogin"> 
+                <button 
+                    onClick={handleVoltar} 
+                    className="botaoVoltar" 
+                    aria-label="Voltar para a página anterior"
+                    disabled={isLoading}
+                >
+                    <ArrowLeftCircle size={50} color="#fff" />
+                </button>
+            </header>
+            <main className='paginaLogin'>                                
+                {isLoading && <p className='msgLoading'>Carregando...</p>}
                 
-                {isLoading && <p style={{ color: 'orange', textAlign: 'center' }}>Carregando...</p>}
-                
-                {erro && <p style={{ color: 'red', textAlign: 'center' }}>{erro}</p>}
+                {erro && <p className='msgErro'>{erro}</p>}
                 
                 <Form
                     tipo="login"
