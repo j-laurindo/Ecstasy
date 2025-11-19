@@ -3,11 +3,7 @@ import bcrypt
 import pymysql.err
 from decimal import Decimal
 import datetime
-# ----------------------------------------------------------
-# MOCK DE DEPENDÊNCIAS (Substitua por suas implementações reais)
-# ----------------------------------------------------------
-# Se este código for executado em um ambiente externo, 
-# as linhas abaixo simulam as dependências.
+
 class MockCursor:
     def __init__(self): self.rowcount = 0; self.lastrowid = 0
     def execute(self, query, params=None): print(f"Executing: {query} with {params}")
@@ -49,27 +45,14 @@ def _get_id_or_insert(cursor, table, field, value):
     # Busca um ID pelo valor ou o insere na tabela (Diretor, Ano, etc.), retornando o ID.
     if not value and field not in ('logo'): 
         if field not in ['poster', 'sinopse', 'tempo_duracao']:
-            # Substituído por um retorno None para evitar crash no mock
-            # raise ValueError(f"Campo obrigatório '{field}' faltando para {table}.")
             return None 
 
     col_name = 'ano' if table == 'Ano' else 'nome'
-    
-    # Simulação da busca e inserção:
-    # cursor.execute(f"SELECT id FROM {table} WHERE {col_name}=%s", (value,))
-    # row = cursor.fetchone()
-    # if row:
-    #     return row['id']
-    
-    # cursor.execute(f"INSERT INTO {table} ({col_name}) VALUES (%s)", (value,))
-    # return cursor.lastrowid
-    
-    # Retorno mock para garantir que as chamadas de update/create funcionem
+
     return 999 
 
 # ==========================================================
 # DAO DE AUTENTICAÇÃO E USUÁRIO (AUTHDAO)
-# (MANTIDO INALTERADO)
 # ==========================================================
 
 class AuthDAO:
@@ -77,7 +60,6 @@ class AuthDAO:
         cursor = mydb.cursor()
         try:
             hashed_senha = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-            # ... (execução SQL)
             mydb.commit()
             return cursor.lastrowid
         except pymysql.err.IntegrityError:
@@ -92,7 +74,6 @@ class AuthDAO:
     def login_usuario(self, email, senha):
         cursor = mydb.cursor()
         try:
-            # ... (execução SQL)
             usuario = cursor.fetchone()
             
             if usuario and usuario.get("senha_hash") and bcrypt.checkpw(senha.encode('utf-8'), usuario["senha_hash"].encode('utf-8')):
@@ -111,14 +92,14 @@ class AuthDAO:
 class FilmeDAO:
     # Lógica de CRUD para Filmes e entidades relacionadas.
     
-    # === READ (R) - carregar_filmes (Atualizado para retornar M:N) ===
+    # === READ (R) - carregar_filmes ===
     def carregar_filmes(self):
         # Versão que carrega TODOS os filmes (sem filtro), mas agrega Gêneros e Atores.
         cursor = mydb.cursor()
         try:
-            # Query ajustada para incluir atores e generos agregados usando GROUP_CONCAT
+            # Query ajustada para incluir atores e generos agregados usando
             cursor.execute("""
-                 SELECT 
+                SELECT 
                     f.id, f.titulo, f.tempo_duracao, f.poster, f.sinopse, f.logo,
                     a.ano, d.nome AS diretor_nome, l.nome AS linguagem_nome,
                     GROUP_CONCAT(DISTINCT g.nome SEPARATOR ',') AS generos,
@@ -132,7 +113,7 @@ class FilmeDAO:
                 LEFT JOIN Filme_Ator fatr ON f.id = fatr.filme_id
                 LEFT JOIN Ator atr ON fatr.ator_id = atr.id
                 GROUP BY f.id
-                ORDER BY f.id ASC
+                ORDER BY f.id ASC;
             """)
             resultados = cursor.fetchall()
 
@@ -163,7 +144,7 @@ class FilmeDAO:
                     LEFT JOIN Genero g ON fg.genero_id = g.id
                     LEFT JOIN Filme_Ator fatr ON f.id = fatr.filme_id
                     LEFT JOIN Ator atr ON fatr.ator_id = atr.id
-                    WHERE f.id = %s  /* <-- A CHAVE ESTÁ AQUI */
+                    WHERE f.id = %s  
                     GROUP BY f.id
             """, (filme_id,)) 
 
@@ -181,7 +162,7 @@ class FilmeDAO:
     def carregar_filmes_filtrados(self, filtros, limit=None):
         cursor = mydb.cursor()
         try:
-            # 1. Base da Query com JOINs para os campos 1:N
+            # Base da Query com JOINs para os campos 1:N
             base_query = """
                 SELECT 
                     f.id, f.titulo, f.tempo_duracao, f.poster, f.sinopse, f.logo,
@@ -219,11 +200,9 @@ class FilmeDAO:
                 if campo in join_map:
                     link_table, link_alias, data_table, data_alias, id_col, name_col = join_map[campo]
                     
-                    # Usa INNER JOIN para garantir que o filme contenha pelo menos um dos valores do filtro
                     join_sql += f" INNER JOIN {link_table} {link_alias} ON f.id = {link_alias}.filme_id "
                     join_sql += f" INNER JOIN {data_table} {data_alias} ON {link_alias}.{id_col} = {data_alias}.id "
                     
-                    # Clausula WHERE (OR logic inside filter group)
                     placeholders = ', '.join(['%s'] * len(valores))
                     where_clauses.append(f"{name_col} IN ({placeholders})")
                     params.extend(valores)
@@ -237,7 +216,7 @@ class FilmeDAO:
                     where_clauses.append(f"{col} IN ({placeholders})")
                     params.extend(valores)
                     
-            # 3. Finalização da Query
+            # Finalização da Query
             full_query = base_query + join_sql
             
             if where_clauses:
@@ -250,15 +229,12 @@ class FilmeDAO:
             # Ordenação padrão: ID decrescente (mais recente/maior ID primeiro)
             full_query += " ORDER BY f.id DESC " 
             
-            # 4. Limite
             if limit and int(limit) > 0:
                 full_query += " LIMIT %s "
                 params.append(int(limit))
 
             # Execução da Query
             cursor.execute(full_query, tuple(params))
-            
-            # 5. Processamento dos resultados (transforma strings agregadas em listas)
             resultados = cursor.fetchall()
             
             for filme in resultados:

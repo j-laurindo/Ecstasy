@@ -8,7 +8,7 @@ CREATE TABLE Filme (
     titulo VARCHAR(254) NOT NULL,
     tempo_duracao VARCHAR(100) NOT NULL,
     poster VARCHAR(2048) NOT NULL,
-    logo VARCHAR(2048),
+    banner VARCHAR(2048),
     sinopse TEXT NOT NULL,
     diretor_id INT NOT NULL,
     linguagem_id INT NOT NULL,
@@ -59,8 +59,6 @@ CREATE TABLE Filme_Genero (
     FOREIGN KEY (genero_id) REFERENCES Genero(id)
 );
 
--- Tabela 2: Filme_Pendente (Novo Filme - Fila de Aprovação)
-
 CREATE TABLE Filme_Pendente (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
@@ -89,6 +87,7 @@ CREATE TABLE Edicao_Filme (
 CREATE TABLE Usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
+    nome VARCHAR(255) NOT NULL, 
     senha_hash VARCHAR(255) NOT NULL, 
     perfil ENUM('user', 'admin') NOT NULL DEFAULT 'user'
 );

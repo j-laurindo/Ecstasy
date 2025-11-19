@@ -1,5 +1,5 @@
 import React from 'react';
-import './CardCarrossel.css'; // ATENÇÃO: Esta linha pode causar erro de compilação!
+import './CardCarrossel.css'; 
 
 function CardCarrossel({ filme }) {
     const generos = filme.generos || [];

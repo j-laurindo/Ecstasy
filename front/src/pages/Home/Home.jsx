@@ -22,10 +22,9 @@ function Home() {
                     </div>
                     <section className='fileiraCard'>
                         <Card
-                            titulo="Card chamativo sobre site"
-                            conteudo="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+                            titulo="Cinema organizado, vida descomplicada"
+                            conteudo="Mergulhe em uma plataforma feita por fãs, para fãs. 
+                            O Ecstasy oferece a melhor experiência para gerenciar sua vida cinematográfica com estilo"
                         />
                         <Card
                             titulo="Meu nome é Julia"

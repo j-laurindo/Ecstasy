@@ -39,6 +39,7 @@ function ListaFilmes() {
         fetchMovies();
     }, []);
 
+    // Lógica do filtro
     const filtroFilmes = useMemo(() => {
         let result = allMovies;
 

@@ -30,7 +30,6 @@ class APIHandler(BaseHTTPRequestHandler):
         self._send_json({"error": message}, code)
 
     def do_OPTIONS(self):
-        # Responde ao CORS preflight.
         self.send_response(204)
         self._set_common_headers()
         self.end_headers()

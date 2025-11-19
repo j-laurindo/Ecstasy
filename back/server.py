@@ -2,7 +2,7 @@
 from http.server import HTTPServer
 from handlers import APIHandler
 from db_connector import DatabaseConnector, DB_CONFIG
-
+    
 def main():
     connector = DatabaseConnector()
     
